@@ -1,0 +1,52 @@
+{
+    "name": "ToolBox Pro — Premium Online Tools & Discord Bot",
+    "short_name": "ToolBox Pro",
+    "description": "15+ premium online tools + Discord Bot installer. QR Code, Invoice, Password Generator, JSON Formatter and more.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#09090b",
+    "theme_color": "#facc15",
+    "orientation": "any",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["utilities", "productivity", "developer tools"],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2309090b' width='100' height='100' rx='20'/><text y='.9em' x='10' font-size='80'>🧰</text></svg>",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "QR Code Generator",
+            "short_name": "QR Code",
+            "url": "/index.html#qr",
+            "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2309090b' width='100' height='100' rx='20'/><text y='.9em' x='10' font-size='70'>📱</text></svg>", "sizes": "96x96"}]
+        },
+        {
+            "name": "Invoice Generator",
+            "short_name": "Invoice",
+            "url": "/index.html#invoice"
+        },
+        {
+            "name": "Password Generator",
+            "short_name": "Password",
+            "url": "/index.html#password"
+        }
+    ]
+}

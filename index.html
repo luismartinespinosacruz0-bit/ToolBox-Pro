@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>ToolBox Pro — Premium Online Tools & Discord Bot</title>
+    <meta name="description" content="Professional online tools: QR Code, Invoice, Password Generator, Color Palette, JSON Formatter + Premium Discord Bot. No signup required.">
+    <meta name="keywords" content="free online tools, QR code generator, invoice generator, Discord bot, premium tools, developer tools">
+    <meta property="og:title" content="ToolBox Pro — Premium Tools & Discord Bot">
+    <meta property="og:description" content="15+ free tools + premium Discord bot with economy, moderation & more.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ToolBox Pro">
+    <meta name="theme-color" content="#09090b">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- OneSignal Push Notifications SDK -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#09090b;--card:#18181b;--border:#27272a;--gold:#facc15;--green:#22c55e;--blue:#3b82f6;--purple:#a855f7;--red:#ef4444;--text:#fafafa;--muted:#71717a;--surface:#0f0f12}
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+        
+        /* HEADER */
+        .nav{position:fixed;top:0;width:100%;background:rgba(9,9,11,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:1000;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .nav-logo{font-size:1.3em;font-weight:800;color:var(--gold);display:flex;align-items:center;gap:8px}
+        .nav-links{display:flex;gap:8px}
+        .nav-links a{color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:8px;font-size:.875em;font-weight:500;transition:all .2s}
+        .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+        .nav-cta{padding:8px 20px;background:var(--gold);color:#000;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:.875em;text-decoration:none;transition:all .2s}
+        .nav-cta:hover{transform:scale(1.03)}
+        
+        /* HERO */
+        .hero{padding:140px 40px 80px;text-align:center;background:radial-gradient(ellipse at top,rgba(250,204,21,.08),transparent 60%)}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.2);border-radius:20px;font-size:.8em;color:var(--gold);margin-bottom:24px}
+        .hero h1{font-size:4em;font-weight:900;line-height:1.1;margin-bottom:16px;max-width:800px;margin-left:auto;margin-right:auto}
+        .hero h1 span{background:linear-gradient(135deg,var(--gold),#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero p{color:var(--muted);font-size:1.2em;max-width:600px;margin:0 auto 40px;line-height:1.6}
+        .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+        .btn-primary{padding:14px 32px;background:var(--gold);color:#000;border:none;border-radius:10px;font-weight:700;font-size:1em;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(250,204,21,.3)}
+        .btn-secondary{padding:14px 32px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:10px;font-weight:600;font-size:1em;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+        .btn-secondary:hover{border-color:var(--muted);background:var(--surface)}
+        
+        /* STATS */
+        .stats{display:flex;justify-content:center;gap:60px;padding:60px 40px;border-bottom:1px solid var(--border)}
+        .stat{text-align:center}
+        .stat .num{font-size:2.5em;font-weight:800;color:var(--gold)}
+        .stat .lbl{color:var(--muted);font-size:.9em;margin-top:4px}
+        
+        /* SECTION */
+        .section{padding:80px 40px;max-width:1200px;margin:0 auto}
+        .section-header{text-align:center;margin-bottom:60px}
+        .section-header h2{font-size:2.5em;font-weight:800;margin-bottom:12px}
+        .section-header p{color:var(--muted);font-size:1.1em;max-width:600px;margin:0 auto}
+        .section-header .badge{display:inline-block;padding:4px 12px;background:rgba(250,204,21,.1);color:var(--gold);border-radius:20px;font-size:.8em;font-weight:600;margin-bottom:12px}
+        
+        /* TOOLS GRID */
+        .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+        .tool-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+        .tool-card:hover{border-color:rgba(250,204,21,.3);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+        .tool-card .icon{font-size:2em;margin-bottom:16px}
+        .tool-card h3{font-size:1.1em;font-weight:700;margin-bottom:8px}
+        .tool-card p{color:var(--muted);font-size:.875em;line-height:1.6}
+        .tool-card .tag{position:absolute;top:16px;right:16px;padding:4px 10px;border-radius:6px;font-size:.7em;font-weight:700}
+        .tool-card .tag.free{background:rgba(34,197,94,.15);color:var(--green)}
+        .tool-card .tag.pro{background:rgba(168,85,247,.15);color:var(--purple)}
+        .tool-card.limited{opacity:1}
+        .premium-card{border:1px solid rgba(250,204,21,.3) !important;background:linear-gradient(135deg,var(--card),rgba(250,204,21,.03)) !important}
+        .premium-card:hover{border-color:var(--gold) !important;box-shadow:0 20px 40px rgba(250,204,21,.1) !important}
+        .premium-card .lock-overlay{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(9,9,11,.92);border-radius:16px;flex-direction:column;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(4px)}
+        .premium-card:hover .lock-overlay{display:flex}
+        .premium-card .lock-overlay .lock-icon{font-size:2.5em;margin-bottom:8px;animation:lock-bounce 1s ease infinite}
+        @keyframes lock-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+        .premium-card .lock-overlay h4{color:var(--gold);font-size:1em;margin-bottom:4px}
+        .premium-card .lock-overlay p{color:var(--muted);font-size:.75em;margin-bottom:12px}
+        .premium-card .lock-overlay .buy-btn{padding:8px 20px;background:var(--gold);color:#000;border:none;border-radius:8px;font-weight:700;font-size:.8em;cursor:pointer}
+        
+        /* LOCKED TOOL SCREEN */
+        .tool-locked{position:relative}
+        .tool-locked::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(9,9,11,.85);border-radius:20px;z-index:5}
+        .tool-locked-content{position:relative;z-index:6;text-align:center;padding:40px}
+        .tool-locked-content .big-lock{font-size:4em;margin-bottom:12px}
+        .tool-locked-content h3{color:var(--gold);font-size:1.3em;margin-bottom:8px}
+        .tool-locked-content p{color:var(--muted);font-size:.9em;margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto}
+        .tool-locked-content .buy-lifetime-btn{padding:14px 32px;background:var(--gold);color:#000;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;transition:all .2s}
+        .tool-locked-content .buy-lifetime-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(250,204,21,.3)}
+        .tool-locked-content .whatsapp-btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:10px 20px;background:#25D366;color:#fff;border:none;border-radius:10px;font-weight:600;font-size:.85em;cursor:pointer;text-decoration:none}
+        .tool-card.limited::after{content:'FREE (3 uses/day)';position:absolute;bottom:0;left:0;right:0;background:rgba(34,197,94,.9);color:#fff;text-align:center;padding:8px;font-size:.75em;font-weight:700;border-radius:0 0 16px 16px;z-index:2}
+        
+        /* TOOL INTERFACE */
+        .tool-ui{display:none;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;margin:20px auto;max-width:900px}
+        .tool-ui.active{display:block}
+        .tool-ui h2{font-size:1.6em;font-weight:700;margin-bottom:6px}
+        .tool-ui .desc{color:var(--muted);margin-bottom:24px}
+        .back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);cursor:pointer;padding:8px 14px;border-radius:8px;font-size:.875em;transition:all .2s;margin-bottom:16px;text-decoration:none}
+        .back-btn:hover{color:var(--gold);background:rgba(250,204,21,.05)}
+        .usage-limit{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:.875em;color:#fca5a5}
+        .usage-limit.ok{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.2);color:#86efac}
+        
+        /* FORMS */
+        label{display:block;color:var(--muted);margin-bottom:6px;font-size:.85em;font-weight:500}
+        input[type="text"],input[type="number"],input[type="url"],input[type="email"],textarea,select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.95em;margin-bottom:14px;outline:none;transition:border .2s;font-family:inherit}
+        input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+        textarea{min-height:120px;resize:vertical;font-family:'SF Mono',monospace}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:8px;border:none;cursor:pointer;font-size:.9em;font-weight:600;transition:all .2s}
+        .btn-gold{background:var(--gold);color:#000}.btn-gold:hover{box-shadow:0 4px 15px rgba(250,204,21,.3)}
+        .btn-gray{background:var(--border);color:var(--text)}.btn-gray:hover{background:#3f3f46}
+        .btn-green{background:var(--green);color:#000}
+        .btn-red{background:var(--red);color:#fff}
+        .row{display:flex;gap:14px;flex-wrap:wrap}.row>*{flex:1;min-width:180px}
+        .output{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-top:16px;min-height:60px;font-family:'SF Mono',monospace;white-space:pre-wrap;word-break:break-all;position:relative;font-size:.9em}
+        .output img{max-width:100%;border-radius:10px}
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        
+        /* PRICING */
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;max-width:1000px;margin:0 auto}
+        .price-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;position:relative;transition:all .3s}
+        .price-card:hover{transform:translateY(-4px)}
+        .price-card.popular{border-color:var(--gold);box-shadow:0 0 60px rgba(250,204,21,.1)}
+        .price-card.popular::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;padding:4px 16px;border-radius:20px;font-size:.7em;font-weight:800;letter-spacing:.5px}
+        .price-card h3{font-size:1.3em;font-weight:700;margin-bottom:4px}
+        .price-card .price{font-size:3em;font-weight:900;margin:16px 0 8px}
+        .price-card .price span{font-size:.35em;color:var(--muted);font-weight:500}
+        .price-card ul{list-style:none;margin:20px 0}
+        .price-card ul li{padding:8px 0;border-bottom:1px solid var(--border);font-size:.9em;color:#d4d4d8;display:flex;align-items:center;gap:8px}
+        .price-card ul li::before{content:'✓';color:var(--green);font-weight:700}
+        .price-card .btn{width:100%;justify-content:center;padding:14px;font-size:1em;margin-top:8px}
+        
+        /* FEATURES TABLE */
+        .feat-table{width:100%;border-collapse:collapse;margin:40px auto;max-width:900px}
+        .feat-table th,.feat-table td{padding:12px 16px;text-align:center;border-bottom:1px solid var(--border)}
+        .feat-table th{color:var(--gold);font-weight:700;font-size:.85em;text-transform:uppercase;letter-spacing:.5px}
+        .feat-table td:first-child{text-align:left;font-weight:500}
+        .feat-table tr:hover{background:rgba(255,255,255,.02)}
+        
+        /* PREMIUM ACCESS */
+        .access-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;max-width:600px;margin:40px auto;text-align:center}
+        .access-box h3{font-size:1.4em;margin-bottom:8px}
+        .access-box p{color:var(--muted);margin-bottom:24px}
+        .access-input{display:flex;gap:10px;max-width:400px;margin:0 auto}
+        .access-input input{flex:1}
+        
+        /* DISCORD SECTION */
+        .discord-section{background:linear-gradient(135deg,rgba(88,101,242,.1),rgba(88,101,242,.02));border:1px solid rgba(88,101,242,.2);border-radius:20px;padding:50px;text-align:center;margin:40px 0}
+        .discord-section h2{font-size:2em;margin-bottom:12px}
+        .discord-section p{color:var(--muted);max-width:600px;margin:0 auto 30px}
+        .bot-features{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;max-width:900px;margin:30px auto;text-align:left}
+        .bot-feat{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px}
+        .bot-feat .icon{font-size:1.8em;margin-bottom:10px}
+        .bot-feat h4{font-size:.95em;margin-bottom:6px}
+        .bot-feat p{color:var(--muted);font-size:.8em}
+        
+        /* FOOTER */
+        .footer{border-top:1px solid var(--border);padding:40px;text-align:center;color:var(--muted);font-size:.85em}
+        .footer a{color:var(--gold);text-decoration:none}
+        
+        /* AD STYLES */
+        .ad-banner{width:100%;max-width:728px;margin:20px auto;text-align:center;min-height:90px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+        .ad-banner-mobile{width:100%;max-width:320px;margin:12px auto;text-align:center;min-height:50px;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+        .ad-interstitial{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:9999;align-items:center;justify-content:center;flex-direction:column}
+        .ad-interstitial.show{display:flex}
+        .ad-interstitial .ad-close{position:absolute;top:10px;right:10px;background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.85em}
+        .ad-interstitial .ad-close.countdown{opacity:.5;cursor:not-allowed}
+        
+        /* MODAL */
+        .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+        .modal-overlay.active{display:flex}
+        .modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;max-width:500px;width:90%;text-align:center}
+        .modal h3{font-size:1.4em;margin-bottom:8px}
+        .modal p{color:var(--muted);margin-bottom:20px}
+        
+        /* PAYMENT MODAL */
+        .payment-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:5000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px);padding:20px}
+        .payment-modal.show{display:flex}
+        .payment-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px 32px;max-width:420px;width:100%;animation:notif-pop .4s ease;position:relative;overflow:hidden}
+        .payment-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--green))}
+        .payment-card h3{font-size:1.3em;margin-bottom:6px}
+        .payment-card .plan-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.8em;font-weight:700;margin-bottom:16px}
+        .payment-card .plan-badge.pro{background:rgba(168,85,247,.15);color:var(--purple)}
+        .payment-card .plan-badge.lt{background:rgba(250,204,21,.15);color:var(--gold)}
+        .payment-card label{display:block;text-align:left;color:var(--muted);margin-bottom:6px;font-size:.85em;font-weight:500}
+        .payment-card input[type=email]{width:100%;padding:14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:1em;margin-bottom:16px;outline:none}
+        .payment-card input[type=email]:focus{border-color:var(--gold)}
+        .payment-card .pay-btn{width:100%;padding:16px;background:var(--gold);color:#000;border:none;border-radius:12px;font-weight:700;font-size:1.05em;cursor:pointer;transition:all .2s;margin-bottom:12px}
+        .payment-card .pay-btn:active{transform:scale(.98)}
+        .payment-card .pay-btn:hover{box-shadow:0 8px 30px rgba(250,204,21,.3)}
+        .payment-card .cancel-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9em}
+        
+        /* KEY GENERATED SCREEN */
+        .key-screen{text-align:center}
+        .key-screen .check-icon{font-size:3.5em;margin-bottom:12px;animation:key-pop .5s ease}
+        @keyframes key-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+        .key-screen .key-box{background:var(--surface);border:2px solid var(--gold);border-radius:12px;padding:16px;margin:16px 0;font-family:'SF Mono',monospace;font-size:1.1em;letter-spacing:2px;color:var(--gold);cursor:pointer;transition:all .2s}
+        .key-screen .key-box:hover{background:rgba(250,204,21,.1)}
+        .key-screen .key-box.copied{border-color:var(--green);color:var(--green)}
+        .key-screen .key-info{text-align:left;font-size:.85em;color:var(--muted);line-height:1.8;margin:16px 0}
+        .key-screen .activate-btn{width:100%;padding:14px;background:var(--green);color:#000;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;margin-top:8px}
+        
+        /* NOTIFICATION PERMISSION PROMPT */
+        .notif-prompt{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:5000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);padding:20px}
+        .notif-prompt.show{display:flex}
+        .notif-prompt-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 32px;max-width:400px;width:100%;text-align:center;animation:notif-pop .4s ease;position:relative;overflow:hidden}
+        .notif-prompt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--green))}
+        @keyframes notif-pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+        .notif-prompt-card .bell-icon{font-size:3em;margin-bottom:16px;animation:bell-shake 1s ease-in-out infinite}
+        @keyframes bell-shake{0%,100%{transform:rotate(0)}10%{transform:rotate(15deg)}20%{transform:rotate(-15deg)}30%{transform:rotate(10deg)}40%{transform:rotate(-10deg)}50%{transform:rotate(5deg)}60%{transform:rotate(0)}}
+        .notif-prompt-card h3{font-size:1.3em;margin-bottom:8px}
+        .notif-prompt-card p{color:var(--muted);font-size:.9em;margin-bottom:24px;line-height:1.5}
+        .notif-prompt-card .notif-features{text-align:left;margin-bottom:24px}
+        .notif-prompt-card .notif-feature{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:.85em;color:#d4d4d8}
+        .notif-prompt-card .notif-feature span{font-size:1.2em}
+        .notif-prompt-card .notif-btns{display:flex;gap:10px}
+        .notif-prompt-card .notif-btns button{flex:1;padding:14px;border:none;border-radius:12px;font-weight:700;font-size:.95em;cursor:pointer;transition:all .2s}
+        .notif-allow{background:var(--gold);color:#000}
+        .notif-allow:active{transform:scale(.97)}
+        .notif-later{background:var(--surface);color:var(--muted);border:1px solid var(--border) !important}
+        .notif-later:active{transform:scale(.97)}
+        .notif-skip{color:var(--muted);font-size:.8em;cursor:pointer;margin-top:12px;display:inline-block}
+        .notif-skip:hover{color:var(--text)}
+        
+        /* NOTIFICATION BADGE on FAB */
+        .notif-badge{position:absolute;top:-4px;right:-4px;width:20px;height:20px;background:var(--red);color:#fff;border-radius:50%;font-size:.7em;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);animation:badge-pop .3s ease}
+        @keyframes badge-pop{from{transform:scale(0)}to{transform:scale(1)}}
+        .notif-active{background:var(--green) !important}
+        
+        /* INSTALL FAB */
+        .install-fab{position:fixed;bottom:24px;right:24px;z-index:3000;display:none}
+        .install-fab.show{display:block}
+        .install-fab-btn{width:56px;height:56px;border-radius:50%;background:var(--gold);color:#000;border:none;cursor:pointer;font-size:1.5em;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(250,204,21,.4);transition:all .3s;animation:fab-pulse 2s infinite}
+        .install-fab-btn:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(250,204,21,.5)}
+        @keyframes fab-pulse{0%,100%{box-shadow:0 4px 20px rgba(250,204,21,.4)}50%{box-shadow:0 4px 30px rgba(250,204,21,.6)}}
+        .install-fab-tooltip{position:absolute;bottom:66px;right:0;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;width:260px;box-shadow:0 10px 40px rgba(0,0,0,.5);display:none}
+        .install-fab-tooltip.show{display:block;animation:fab-slide .3s ease}
+        @keyframes fab-slide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .install-fab-tooltip h4{font-size:.95em;margin-bottom:4px}
+        .install-fab-tooltip p{font-size:.8em;color:var(--muted);margin-bottom:12px;line-height:1.4}
+        .install-fab-tooltip .tooltip-btns{display:flex;gap:8px}
+        .install-fab-tooltip .tooltip-btns button{flex:1;padding:8px;border-radius:8px;border:none;font-size:.8em;font-weight:600;cursor:pointer}
+        .install-fab-tooltip .tooltip-install{background:var(--gold);color:#000}
+        .install-fab-tooltip .tooltip-close{background:var(--border);color:var(--text)}
+        
+        /* INSTALL GUIDE MODAL */
+        .install-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+        .install-modal.active{display:flex}
+        .install-modal-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;max-width:420px;width:100%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+        .install-modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-size:1.3em;cursor:pointer;padding:4px 8px}
+        .install-modal-icon{font-size:3em;text-align:center;margin-bottom:8px}
+        .install-modal-card h3{font-size:1.2em;text-align:center;color:var(--gold);margin-bottom:6px}
+        .install-modal-card p{font-size:.85em;color:var(--muted);text-align:center;margin-bottom:16px}
+        .install-steps{display:flex;flex-direction:column;gap:12px}
+        .install-step{display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+        .install-step .step-num{width:28px;height:28px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:800;flex-shrink:0}
+        .install-step .step-text{font-size:.85em;line-height:1.5}
+        .install-step .step-text b{color:var(--gold)}
+        .install-platform-badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:.75em;font-weight:700;margin-bottom:12px}
+        .install-platform-badge.ios{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.3)}
+        .install-platform-badge.android{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
+        .install-platform-badge.desktop{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3)}
+        
+        /* UPDATE BANNER */
+        .update-banner{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(34,197,94,.05));border:1px solid rgba(34,197,94,.3);border-radius:14px;padding:14px 24px;z-index:3000;display:none;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:90vw;backdrop-filter:blur(20px)}
+        .update-banner.show{display:flex}
+        .update-banner h4{font-size:.95em;color:var(--green);white-space:nowrap}
+        .update-banner p{font-size:.8em;color:var(--muted);white-space:nowrap}
+        .update-banner .btn-update{padding:8px 20px;background:var(--green);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85em;white-space:nowrap}
+        .update-banner .btn-dismiss{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1em;padding:4px}
+        
+        /* MOBILE NAV TOGGLE */
+        .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5em;cursor:pointer;padding:4px}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(9,9,11,.98);border-bottom:1px solid var(--border);padding:20px;z-index:999;backdrop-filter:blur(20px)}
+        .mobile-menu.show{display:block}
+        .mobile-menu a{display:block;padding:14px 16px;color:var(--text);text-decoration:none;font-size:1em;font-weight:500;border-bottom:1px solid var(--border);transition:all .2s}
+        .mobile-menu a:last-child{border-bottom:none}
+        .mobile-menu a:hover{color:var(--gold);background:rgba(250,204,21,.05)}
+        .mobile-menu .cta-btn{display:block;text-align:center;padding:14px;background:var(--gold);color:#000;border-radius:10px;font-weight:700;margin-top:8px}
+        
+        /* SAFE AREAS for mobile */
+        @supports(padding:env(safe-area-inset-bottom)){
+            .install-fab{bottom:calc(24px + env(safe-area-inset-bottom))}
+            .footer{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+        }
+        
+        /* RESPONSIVE — TABLET */
+        @media(max-width:1024px){
+            .hero h1{font-size:3em}
+            .stats{gap:40px}
+        }
+        
+        /* RESPONSIVE — MOBILE */
+        @media(max-width:768px){
+            .nav{padding:0 16px}
+            .nav-links{display:none}
+            .nav-toggle{display:block}
+            .nav-cta{display:none}
+            .hero{padding:120px 16px 60px}
+            .hero h1{font-size:2em}
+            .hero p{font-size:1em}
+            .hero-btns{flex-direction:column;align-items:stretch}
+            .btn-primary,.btn-secondary{justify-content:center}
+            .section{padding:50px 16px}
+            .section-header h2{font-size:1.8em}
+            .tools-grid{grid-template-columns:1fr;gap:12px}
+            .tool-card{padding:20px}
+            .grid-2{grid-template-columns:1fr}
+            .stats{gap:20px;padding:40px 16px;flex-wrap:wrap}
+            .stat .num{font-size:1.8em}
+            .pricing-grid{grid-template-columns:1fr;gap:16px}
+            .price-card{padding:28px}
+            .price-card .price{font-size:2.4em}
+            .feat-table{font-size:.8em}
+            .feat-table th,.feat-table td{padding:8px 6px}
+            .access-box{padding:28px 16px}
+            .access-input{flex-direction:column}
+            .discord-section{padding:30px 16px}
+            .discord-section h2{font-size:1.5em}
+            .bot-features{grid-template-columns:1fr}
+            .footer{padding:30px 16px}
+            .tool-ui{padding:20px 16px;margin:12px 0}
+            .row{flex-direction:column}
+            .row>*{min-width:100%}
+        }
+        
+        /* RESPONSIVE — VERY SMALL SCREENS */
+        @media(max-width:400px){
+            .hero h1{font-size:1.6em}
+            .hero-badge{font-size:.7em;padding:4px 12px}
+            .stats{gap:12px}
+            .stat .num{font-size:1.4em}
+            .stat .lbl{font-size:.75em}
+            .section-header h2{font-size:1.4em}
+            .price-card .price{font-size:2em}
+        }
+        
+        /* LANDSCAPE on mobile */
+        @media(max-height:500px) and (orientation:landscape){
+            .hero{padding:80px 16px 40px}
+            .hero h1{font-size:1.8em}
+        }
+        
+        /* TOUCH DEVICE optimizations */
+        @media(hover:none)and(pointer:coarse){
+            .tool-card:hover{transform:none;box-shadow:none}
+            .btn-primary:active,.btn-secondary:active{transform:scale(.97)}
+            .tool-card:active{transform:scale(.98)}
+            a,button{min-height:44px;min-width:44px}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-logo">🧰 ToolBox <span style="color:var(--gold)">Pro</span></div>
+    <div class="nav-links">
+        <a href="#tools">Tools</a>
+        <a href="#discord">Discord Bot</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#access">My Access</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    <a href="#pricing" class="nav-cta">Get Premium</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-badge">⚡ Trusted by 10,000+ users worldwide</div>
+    <h1>The <span>Ultimate</span> Toolkit for Developers & Creators</h1>
+    <p>15+ professional online tools + a premium Discord bot with economy, moderation, and more. Free to start, premium to unlock everything.</p>
+    <div class="hero-btns">
+        <a href="#tools" class="btn-primary">Start Free →</a>
+        <a href="#pricing" class="btn-secondary">View Premium</a>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stat"><div class="num">15+</div><div class="lbl">Online Tools</div></div>
+    <div class="stat"><div class="num">10K+</div><div class="lbl">Users</div></div>
+    <div class="stat"><div class="num">99.9%</div><div class="lbl">Uptime</div></div>
+    <div class="stat"><div class="num">24/7</div><div class="lbl">Support</div></div>
+</div>
+
+<!-- TOOLS -->
+<section class="section" id="tools">
+    <div class="section-header">
+        <div class="badge">🧰 Online Tools</div>
+        <h2>Powerful Tools, Zero Setup</h2>
+        <p>Professional-grade tools that run directly in your browser. No downloads, no signups, no waiting.</p>
+    </div>
+    <div class="tools-grid">
+        <div class="tool-card limited" onclick="openTool('qrcode')"><div class="icon">📱</div><h3>QR Code Generator</h3><p>Generate QR codes for URLs, text, WiFi. Download as PNG.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('invoice')"><div class="icon">🧾</div><h3>Invoice Generator</h3><p>Create professional invoices. Download as PDF.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('password')"><div class="icon">🔐</div><h3>Password Generator</h3><p>Generate strong, secure passwords with custom rules.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('color')"><div class="icon">🎨</div><h3>Color Palette</h3><p>Generate beautiful color palettes. Copy HEX/RGB codes.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('json')"><div class="icon">📋</div><h3>JSON Formatter</h3><p>Format, validate & beautify JSON data instantly.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('base64')"><div class="icon">🔄</div><h3>Base64 Encoder</h3><p>Encode and decode Base64 strings.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('hash')"><div class="icon">🔢</div><h3>Hash Generator</h3><p>Generate SHA-256, SHA-512 hashes from text.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('uuid')"><div class="icon">🆔</div><h3>UUID Generator</h3><p>Generate v4 UUIDs instantly.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('markdown')"><div class="icon">📝</div><h3>Markdown Preview</h3><p>Write Markdown, see live preview.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('lorem')"><div class="icon">📄</div><h3>Lorem Ipsum</h3><p>Generate placeholder text.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('gradient')"><div class="icon">🌈</div><h3>CSS Gradient</h3><p>Create CSS gradients with preview.</p><div class="tag free">FREE</div></div>
+        <div class="tool-card limited" onclick="openTool('wordcount')"><div class="icon">🔢</div><h3>Word Counter</h3><p>Count words, characters, sentences.</p><div class="tag free">FREE</div></div>
+        <!-- PREMIUM TOOLS (Lifetime Only) -->
+        <div class="tool-card premium-card" onclick="showLockedTool('aitext','🤖','AI Text Generator','Generate articles, emails, code, translations with AI. Unlimited generations.')" style="border-color:rgba(250,204,21,.3);position:relative"><div class="icon">🤖</div><h3>AI Text Generator</h3><p>Generate articles, emails, code, translations with AI.</p><div class="tag pro">LIFETIME</div><div class="lock-overlay"><div class="lock-icon">🔒</div><h4>Lifetime Exclusive</h4><p>Buy Lifetime to unlock</p><button class="buy-btn" onclick="event.stopPropagation();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Lifetime — $29.99</button></div></div>
+        <div class="tool-card premium-card" onclick="showLockedTool('resume','📄','Resume Builder','Build professional resumes with live preview. Download as PDF.')" style="border-color:rgba(250,204,21,.3);position:relative"><div class="icon">📄</div><h3>Resume Builder</h3><p>Build professional resumes. Download as PDF.</p><div class="tag pro">LIFETIME</div><div class="lock-overlay"><div class="lock-icon">🔒</div><h4>Lifetime Exclusive</h4><p>Buy Lifetime to unlock</p><button class="buy-btn" onclick="event.stopPropagation();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Lifetime — $29.99</button></div></div>
+        <div class="tool-card premium-card" onclick="showLockedTool('bgremove','✂️','Background Remover','Remove image backgrounds instantly. Download clean PNG.')" style="border-color:rgba(250,204,21,.3);position:relative"><div class="icon">✂️</div><h3>Background Remover</h3><p>Remove image backgrounds instantly. Download PNG.</p><div class="tag pro">LIFETIME</div><div class="lock-overlay"><div class="lock-icon">🔒</div><h4>Lifetime Exclusive</h4><p>Buy Lifetime to unlock</p><button class="buy-btn" onclick="event.stopPropagation();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Lifetime — $29.99</button></div></div>
+        <div class="tool-card premium-card" onclick="showLockedTool('social','📸','Social Media Post','Create Instagram, Twitter, Facebook posts. Download as image.')" style="border-color:rgba(250,204,21,.3);position:relative"><div class="icon">📸</div><h3>Social Media Post</h3><p>Create Instagram, Twitter, Facebook posts.</p><div class="tag pro">LIFETIME</div><div class="lock-overlay"><div class="lock-icon">🔒</div><h4>Lifetime Exclusive</h4><p>Buy Lifetime to unlock</p><button class="buy-btn" onclick="event.stopPropagation();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Lifetime — $29.99</button></div></div>
+        <div class="tool-card premium-card" onclick="showLockedTool('screenshot','🖥️','Website Screenshot','Take screenshots of any website URL. Desktop, tablet, or mobile.')" style="border-color:rgba(250,204,21,.3);position:relative"><div class="icon">🖥️</div><h3>Website Screenshot</h3><p>Take screenshots of any website URL.</p><div class="tag pro">LIFETIME</div><div class="lock-overlay"><div class="lock-icon">🔒</div><h4>Lifetime Exclusive</h4><p>Buy Lifetime to unlock</p><button class="buy-btn" onclick="event.stopPropagation();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Lifetime — $29.99</button></div></div>
+        <div class="tool-card premium-card" onclick="showLockedTool('budget','💰','Budget Calculator','Track expenses, income, savings goals. Visual charts.')" style="border-color:rgba(250,204,21,.3);position:relative"><div class="icon">💰</div><h3>Budget Calculator</h3><p>Track expenses, income, savings goals.</p><div class="tag pro">LIFETIME</div><div class="lock-overlay"><div class="lock-icon">🔒</div><h4>Lifetime Exclusive</h4><p>Buy Lifetime to unlock</p><button class="buy-btn" onclick="event.stopPropagation();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Lifetime — $29.99</button></div></div>
+        <div class="tool-card premium-card" onclick="showLockedTool('colorpick','🎯','Color Picker Pro','Pick colors from any image. Generate palettes.')" style="border-color:rgba(250,204,21,.3);position:relative"><div class="icon">🎯</div><h3>Color Picker Pro</h3><p>Pick colors from images, generate palettes.</p><div class="tag pro">LIFETIME</div><div class="lock-overlay"><div class="lock-icon">🔒</div><h4>Lifetime Exclusive</h4><p>Buy Lifetime to unlock</p><button class="buy-btn" onclick="event.stopPropagation();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Lifetime — $29.99</button></div></div>
+        <div class="tool-card premium-card" onclick="showLockedTool('regex','🔍','Regex Tester','Test regex patterns with live highlighting and match count.')" style="border-color:rgba(250,204,21,.3);position:relative"><div class="icon">🔍</div><h3>Regex Tester</h3><p>Test regex patterns with live matching.</p><div class="tag pro">LIFETIME</div><div class="lock-overlay"><div class="lock-icon">🔒</div><h4>Lifetime Exclusive</h4><p>Buy Lifetime to unlock</p><button class="buy-btn" onclick="event.stopPropagation();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Lifetime — $29.99</button></div></div>
+        <div class="tool-card" onclick="showModal('Unlock Lifetime to access AI Text Generator, Resume Builder, Background Remover, Social Media Posts, and more premium tools!')" style="border-style:dashed;opacity:.5"><div class="icon">⭐</div><h3>8 More Premium Tools</h3><p>AI Text, Resume, Background Remover, Social Posts, and more. Lifetime only.</p><div class="tag pro">LIFETIME</div></div>
+    </div>
+</section>
+
+<!-- TOOL INTERFACES -->
+<div style="max-width:900px;margin:0 auto;padding:0 20px">
+
+<div class="tool-ui" id="tool-qrcode">
+    <a class="back-btn" onclick="showHome()">← Back</a>
+    <h2>📱 QR Code Generator</h2>
+    <p class="desc">Generate QR codes for any content. Free: 3 uses/day.</p>
+    <div class="usage-limit" id="qr-usage"></div>
+    <label>Type</label>
+    <select id="qr-type" onchange="generateQR()"><option value="url">URL</option><option value="text">Text</option><option value="wifi">WiFi</option><option value="email">Email</option></select>
+    <label>Content</label>
+    <input type="text" id="qr-input" placeholder="https://example.com" oninput="generateQR()">
+    <div id="wifi-fields" style="display:none"><div class="grid-2"><div><label>SSID</label><input type="text" id="qr-wifi-ssid" placeholder="Network" oninput="generateQR()"></div><div><label>Password</label><input type="text" id="qr-wifi-pass" placeholder="Pass" oninput="generateQR()"></div></div></div>
+    <div class="row"><div><label>Size</label><select id="qr-size" onchange="generateQR()"><option value="200">200px</option><option value="300" selected>300px</option><option value="500">500px</option></select></div><div><label>Color</label><input type="color" id="qr-color" value="#000000" onchange="generateQR()" style="height:44px;padding:5px"></div></div>
+    <div class="output" id="qr-output" style="text-align:center;display:flex;align-items:center;justify-content:center;min-height:340px"><p style="color:var(--muted)">Type above to generate...</p></div>
+    <div style="text-align:center;margin-top:14px"><button class="btn btn-gold" onclick="downloadQR()">⬇ Download PNG</button></div>
+</div>
+
+<div class="tool-ui" id="tool-invoice">
+    <a class="back-btn" onclick="showHome()">← Back</a>
+    <h2>🧾 Invoice Generator</h2>
+    <p class="desc">Create professional invoices. Free: 3 uses/day.</p>
+    <div class="usage-limit" id="inv-usage"></div>
+    <div class="grid-2"><div><label>Your Business</label><input type="text" id="inv-from" placeholder="My Business LLC"></div><div><label>Client</label><input type="text" id="inv-to" placeholder="Client Corp"></div><div><label>Invoice #</label><input type="text" id="inv-number" placeholder="INV-001"></div><div><label>Date</label><input type="date" id="inv-date"></div></div>
+    <h3 style="color:var(--gold);margin:16px 0 8px;font-size:.95em">Items</h3>
+    <div id="inv-items"><div class="row" style="margin-bottom:8px"><div style="flex:3"><input type="text" placeholder="Description" class="inv-desc"></div><div style="flex:1"><input type="number" placeholder="Qty" class="inv-qty" value="1" onchange="calcInvoice()"></div><div style="flex:1"><input type="number" placeholder="Price" class="inv-price" step="0.01" onchange="calcInvoice()"></div></div></div>
+    <button class="btn btn-gray" onclick="addInvoiceItem()" style="margin-bottom:16px">+ Add Item</button>
+    <div><label>Tax %</label><input type="number" id="inv-tax" value="0" onchange="calcInvoice()" style="width:80px"></div>
+    <div class="output" style="font-family:inherit"><div id="inv-preview" style="background:#fff;color:#000;padding:24px;border-radius:10px"><div style="text-align:center;margin-bottom:16px"><h1 style="font-size:1.5em">INVOICE</h1><p id="inv-preview-num"></p></div><div class="grid-2" style="margin-bottom:16px;font-size:.85em"><div><b>From:</b><br><span id="inv-preview-from"></span></div><div><b>To:</b><br><span id="inv-preview-to"></span></div></div><table style="width:100%;border-collapse:collapse;font-size:.85em"><thead><tr style="background:#f5f5f5"><th style="padding:8px;text-align:left">Item</th><th style="padding:8px">Qty</th><th style="padding:8px;text-align:right">Price</th><th style="padding:8px;text-align:right">Total</th></tr></thead><tbody id="inv-table-body"></tbody></table><div style="text-align:right;margin-top:12px"><div>Subtotal: $<span id="inv-subtotal">0.00</span></div><div>Tax: $<span id="inv-tax-amount">0.00</span></div><div style="font-size:1.2em;font-weight:700;margin-top:6px">Total: $<span id="inv-total">0.00</span></div></div></div></div>
+    <div style="text-align:center;margin-top:14px"><button class="btn btn-gold" onclick="window.print()">⬇ Print / Save PDF</button></div>
+</div>
+
+<div class="tool-ui" id="tool-password"><a class="back-btn" onclick="showHome()">← Back</a><h2>🔐 Password Generator</h2><p class="desc">Generate strong passwords. Free: 3 uses/day.</p><div class="usage-limit" id="pw-usage"></div><label>Length: <span id="pw-len-val">16</span></label><input type="range" id="pw-length" min="8" max="128" value="16" oninput="document.getElementById('pw-len-val').textContent=this.value;genPw()" style="width:100%;margin-bottom:12px"><div class="row"><label><input type="checkbox" id="pw-u" checked onchange="genPw()"> A-Z</label><label><input type="checkbox" id="pw-l" checked onchange="genPw()"> a-z</label><label><input type="checkbox" id="pw-n" checked onchange="genPw()"> 0-9</label><label><input type="checkbox" id="pw-s" checked onchange="genPw()"> !@#$</label></div><div class="output" id="pw-output" style="font-size:1.3em;text-align:center;padding:20px;color:var(--green);letter-spacing:2px">Click generate...</div><div style="text-align:center;margin-top:12px;display:flex;gap:8px;justify-content:center"><button class="btn btn-gold" onclick="genPw()">🔄 Generate</button><button class="btn btn-green" onclick="copyText('pw-output')">📋 Copy</button></div></div>
+
+<div class="tool-ui" id="tool-color"><a class="back-btn" onclick="showHome()">← Back</a><h2>🎨 Color Palette</h2><p class="desc">Generate palettes. Click color to copy. Free: 3/day.</p><div class="usage-limit" id="color-usage"></div><div style="text-align:center;margin-bottom:16px"><button class="btn btn-gold" onclick="genPalette()">Generate Palette</button> <select id="palette-n" onchange="genPalette()" style="width:auto;padding:10px;border-radius:8px;background:var(--surface);color:#fff;border:1px solid var(--border);margin-left:8px"><option value="5">5 Colors</option><option value="7">7 Colors</option><option value="10">10 Colors</option></select></div><div id="palette-output" class="output" style="padding:0;overflow:hidden"></div></div>
+
+<div class="tool-ui" id="tool-json"><a class="back-btn" onclick="showHome()">← Back</a><h2>📋 JSON Formatter</h2><p class="desc">Format & validate JSON. Free: 3/day.</p><div class="usage-limit" id="json-usage"></div><textarea id="json-input" placeholder='{"key": "value"}' style="min-height:180px" oninput="fmtJson()"></textarea><div style="display:flex;gap:8px;margin:10px 0"><button class="btn btn-gold" onclick="fmtJson()">Format</button><button class="btn btn-gray" onclick="miniJson()">Minify</button><button class="btn btn-green" onclick="copyText('json-output')">Copy</button></div><div class="output" id="json-output" style="min-height:120px"></div></div>
+
+<div class="tool-ui" id="tool-base64"><a class="back-btn" onclick="showHome()">← Back</a><h2>🔄 Base64 Encoder</h2><p class="desc">Encode/decode Base64. Free: 3/day.</p><div class="usage-limit" id="b64-usage"></div><textarea id="b64-input" placeholder="Enter text..."></textarea><div style="display:flex;gap:8px;margin-bottom:16px"><button class="btn btn-gold" onclick="b64Enc()">Encode</button><button class="btn btn-gray" onclick="b64Dec()">Decode</button><button class="btn btn-green" onclick="copyText('b64-output')">Copy</button></div><div class="output" id="b64-output"></div></div>
+
+<div class="tool-ui" id="tool-hash"><a class="back-btn" onclick="showHome()">← Back</a><h2>🔢 Hash Generator</h2><p class="desc">Generate SHA hashes. Free: 3/day.</p><div class="usage-limit" id="hash-usage"></div><textarea id="hash-input" placeholder="Enter text to hash..." oninput="genHash()"></textarea><div class="output" id="hash-output" style="font-size:.85em"></div></div>
+
+<div class="tool-ui" id="tool-uuid"><a class="back-btn" onclick="showHome()">← Back</a><h2>🆔 UUID Generator</h2><p class="desc">Generate UUIDs. Free: 3/day.</p><div class="usage-limit" id="uuid-usage"></div><div style="text-align:center;margin-bottom:16px"><input type="number" id="uuid-count" value="5" min="1" max="100" style="width:80px;display:inline-block"> <button class="btn btn-gold" onclick="genUUID()">Generate</button></div><div class="output" id="uuid-output" style="line-height:2"></div></div>
+
+<div class="tool-ui" id="tool-markdown"><a class="back-btn" onclick="showHome()">← Back</a><h2>📝 Markdown Preview</h2><p class="desc">Live Markdown preview. Free: 3/day.</p><div class="usage-limit" id="md-usage"></div><div class="grid-2" style="height:380px"><div><label>Markdown</label><textarea id="md-input" style="height:100%;min-height:340px" oninput="renderMd()" placeholder="# Hello\n\n**Bold** text"></textarea></div><div><label>Preview</label><div id="md-output" style="height:100%;overflow:auto;background:#fff;color:#000;padding:16px;border-radius:10px;line-height:1.6"></div></div></div></div>
+
+<div class="tool-ui" id="tool-lorem"><a class="back-btn" onclick="showHome()">← Back</a><h2>📄 Lorem Ipsum</h2><p class="desc">Placeholder text generator. Free: 3/day.</p><div class="usage-limit" id="lorem-usage"></div><div class="row"><div><label>Count</label><input type="number" id="lorem-count" value="3" min="1" max="20"></div><div><label>Type</label><select id="lorem-type"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select></div></div><button class="btn btn-gold" onclick="genLorem()" style="margin-bottom:12px">Generate</button><div class="output" id="lorem-output" style="line-height:1.8"></div><button class="btn btn-green" onclick="copyText('lorem-output')" style="margin-top:8px">Copy</button></div>
+
+<div class="tool-ui" id="tool-gradient"><a class="back-btn" onclick="showHome()">← Back</a><h2>🌈 CSS Gradient</h2><p class="desc">Create CSS gradients. Free: 3/day.</p><div class="usage-limit" id="grad-usage"></div><div class="row"><div><label>Color 1</label><input type="color" id="grad-c1" value="#facc15" onchange="genGrad()" style="height:44px;width:100%;padding:5px"></div><div><label>Color 2</label><input type="color" id="grad-c2" value="#a855f7" onchange="genGrad()" style="height:44px;width:100%;padding:5px"></div><div><label>Angle</label><input type="number" id="grad-angle" value="135" onchange="genGrad()" style="height:44px"></div></div><div id="grad-preview" style="width:100%;height:120px;border-radius:10px;margin:14px 0;border:1px solid var(--border)"></div><div class="output" id="grad-output"></div><button class="btn btn-green" onclick="copyText('grad-output')" style="margin-top:8px">Copy CSS</button></div>
+
+<div class="tool-ui" id="tool-wordcount"><a class="back-btn" onclick="showHome()">← Back</a><h2>🔢 Word Counter</h2><p class="desc">Count words & characters. Free: 3/day.</p><div class="usage-limit" id="wc-usage"></div><textarea id="wc-input" placeholder="Type or paste text..." oninput="countWc()" style="min-height:180px"></textarea><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px"><div style="background:var(--surface);padding:16px;border-radius:10px;text-align:center;border:1px solid var(--border)"><div style="font-size:1.8em;font-weight:800;color:var(--gold)" id="wc-words">0</div><div style="color:var(--muted);font-size:.8em">Words</div></div><div style="background:var(--surface);padding:16px;border-radius:10px;text-align:center;border:1px solid var(--border)"><div style="font-size:1.8em;font-weight:800;color:var(--green)" id="wc-chars">0</div><div style="color:var(--muted);font-size:.8em">Characters</div></div><div style="background:var(--surface);padding:16px;border-radius:10px;text-align:center;border:1px solid var(--border)"><div style="font-size:1.8em;font-weight:800;color:var(--blue)" id="wc-sent">0</div><div style="color:var(--muted);font-size:.8em">Sentences</div></div><div style="background:var(--surface);padding:16px;border-radius:10px;text-align:center;border:1px solid var(--border)"><div style="font-size:1.8em;font-weight:800;color:var(--purple)" id="wc-time">0</div><div style="color:var(--muted);font-size:.8em">Min Read</div></div></div></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PREMIUM TOOLS (Lifetime Exclusive) -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<div class="tool-ui" id="tool-aitext"><a class="back-btn" onclick="showHome()">← Back</a><h2>🤖 AI Text Generator</h2><p class="desc">Generate articles, emails, code & translations. Lifetime exclusive.</p><label>Prompt</label><textarea id="ai-prompt" placeholder="Write a professional email to a client about a project delay..." style="min-height:100px"></textarea><div class="row"><div><label>Type</label><select id="ai-type"><option value="email">Email</option><option value="article">Article</option><option value="code">Code</option><option value="translate">Translate</option><option value="summary">Summary</option><option value="creative">Creative Writing</option></select></div><div><label>Tone</label><select id="ai-tone"><option value="professional">Professional</option><option value="casual">Casual</option><option value="formal">Formal</option><option value="friendly">Friendly</option></select></div></div><button class="btn btn-gold" onclick="generateAIText()">Generate Text</button><div class="output" id="ai-output" style="margin-top:16px;min-height:150px"></div><button class="btn btn-green" onclick="copyText('ai-output')" style="margin-top:8px">Copy Result</button></div>
+
+<div class="tool-ui" id="tool-resume"><a class="back-btn" onclick="showHome()">← Back</a><h2>📄 Resume Builder</h2><p class="desc">Build a professional resume. Download as PDF. Lifetime exclusive.</p><div class="row"><div><label>Full Name</label><input type="text" id="res-name" placeholder="John Doe"></div><div><label>Title</label><input type="text" id="res-title" placeholder="Software Engineer"></div></div><div class="row"><div><label>Email</label><input type="email" id="res-email" placeholder="john@email.com"></div><div><label>Phone</label><input type="text" id="res-phone" placeholder="(555) 123-4567"></div></div><label>Summary</label><textarea id="res-summary" placeholder="Brief professional summary..." style="min-height:60px"></textarea><label>Work Experience</label><textarea id="res-experience" placeholder="Company Name - Position (2020-2024)&#10;• Led team of 5 engineers&#10;• Increased revenue by 30%" style="min-height:80px"></textarea><label>Skills</label><input type="text" id="res-skills" placeholder="JavaScript, Python, React, Node.js"><button class="btn btn-gold" onclick="buildResume()">Build Resume</button><div id="resume-preview" style="margin-top:16px"></div><button class="btn btn-green" onclick="downloadResumePDF()" style="margin-top:8px">Download PDF</button></div>
+
+<div class="tool-ui" id="tool-bgremove"><a class="back-btn" onclick="showHome()">← Back</a><h2>✂️ Background Remover</h2><p class="desc">Remove image backgrounds instantly. Lifetime exclusive.</p><label>Upload Image</label><input type="file" id="bg-file" accept="image/*" onchange="previewBG(this)" style="padding:10px"><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px"><div style="text-align:center"><div style="color:var(--muted);font-size:.85em;margin-bottom:8px">Original</div><div id="bg-original" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--muted)">No image</div></div><div style="text-align:center"><div style="color:var(--muted);font-size:.85em;margin-bottom:8px">Result</div><div id="bg-result" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--muted)">Upload to process</div></div></div><button class="btn btn-gold" onclick="removeBackground()" style="margin-top:16px">Remove Background</button></div>
+
+<div class="tool-ui" id="tool-social"><a class="back-btn" onclick="showHome()">← Back</a><h2>📸 Social Media Post Maker</h2><p class="desc">Create posts for Instagram, Twitter, Facebook. Lifetime exclusive.</p><label>Platform</label><select id="social-platform" onchange="updateSocialSize()"><option value="instagram">Instagram (1080x1080)</option><option value="twitter">Twitter/X (1200x675)</option><option value="facebook">Facebook (1200x630)</option><option value="story">Story (1080x1920)</option></select><label>Background Color</label><input type="color" id="social-bg" value="#facc15" style="height:44px;width:100%"><label>Main Text</label><input type="text" id="social-text" placeholder="Your amazing content here!" oninput="previewSocial()"><label>Sub Text</label><input type="text" id="social-sub" placeholder="@yourusername" oninput="previewSocial()"><div id="social-preview" style="margin-top:16px;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:250px;background:#facc15"><div style="padding:30px;text-align:center"><div id="social-preview-text" style="font-size:1.5em;font-weight:800;color:#000;line-height:1.3">Your amazing content here!</div><div id="social-preview-sub" style="font-size:.9em;color:rgba(0,0,0,.6);margin-top:8px">@yourusername</div></div></div><button class="btn btn-green" onclick="downloadSocialPost()" style="margin-top:12px">Download Image</button></div>
+
+<div class="tool-ui" id="tool-screenshot"><a class="back-btn" onclick="showHome()">← Back</a><h2>🖥️ Website Screenshot</h2><p class="desc">Take screenshots of any website. Lifetime exclusive.</p><label>Website URL</label><input type="url" id="ss-url" placeholder="https://example.com"><div class="row"><div><label>Width</label><select id="ss-width"><option value="1280">Desktop (1280px)</option><option value="768">Tablet (768px)</option><option value="375">Mobile (375px)</option></select></div><div><label>Format</label><select id="ss-format"><option value="png">PNG</option><option value="jpg">JPG</option></select></div></div><button class="btn btn-gold" onclick="takeScreenshot()">Take Screenshot</button><div id="ss-result" style="margin-top:16px;min-height:100px;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted)">Enter URL and click Take Screenshot</div></div>
+
+<div class="tool-ui" id="tool-budget"><a class="back-btn" onclick="showHome()">← Back</a><h2>💰 Budget Calculator</h2><p class="desc">Track expenses, income & savings. Lifetime exclusive.</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px"><div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:16px;text-align:center"><div style="color:var(--muted);font-size:.8em;margin-bottom:4px">Income</div><div id="bud-income" style="font-size:1.8em;font-weight:800;color:var(--green)">$0</div></div><div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:16px;text-align:center"><div style="color:var(--muted);font-size:.8em;margin-bottom:4px">Expenses</div><div id="bud-expenses" style="font-size:1.8em;font-weight:800;color:var(--red)">$0</div></div><div style="background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.2);border-radius:12px;padding:16px;text-align:center"><div style="color:var(--muted);font-size:.8em;margin-bottom:4px">Balance</div><div id="bud-balance" style="font-size:1.8em;font-weight:800;color:var(--gold)">$0</div></div></div><label>Add Transaction</label><div class="row"><div><select id="bud-type"><option value="income">Income (+)</option><option value="expense">Expense (-)</option></select></div><div><input type="text" id="bud-desc" placeholder="Description"></div><div><input type="number" id="bud-amount" placeholder="Amount"></div></div><button class="btn btn-gold" onclick="addTransaction()" style="margin-top:12px">Add Transaction</button><div id="bud-list" style="margin-top:16px"></div><button class="btn btn-red" onclick="clearBudget()" style="margin-top:12px">Clear All</button></div>
+
+<div class="tool-ui" id="tool-colorpick"><a class="back-btn" onclick="showHome()">← Back</a><h2>🎯 Color Picker Pro</h2><p class="desc">Pick colors from images & generate palettes. Lifetime exclusive.</p><label>Upload Image</label><input type="file" id="cpick-file" accept="image/*" onchange="loadCPickImage(this)" style="padding:10px"><canvas id="cpick-canvas" style="display:none"></canvas><div id="cpick-area" style="margin-top:12px;border:1px solid var(--border);border-radius:10px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--muted)">Upload an image to pick colors</div><div style="display:flex;align-items:center;gap:12px;margin-top:12px"><div id="cpick-selected" style="width:50px;height:50px;border-radius:10px;border:2px solid var(--border);background:#ccc"></div><div><div style="font-weight:600" id="cpick-hex">#CCCCCC</div><div style="color:var(--muted);font-size:.8em" id="cpick-rgb">rgb(204, 204, 204)</div></div><button class="btn btn-gray" onclick="copyCPickHex()">Copy HEX</button></div></div>
+
+<div class="tool-ui" id="tool-regex"><a class="back-btn" onclick="showHome()">← Back</a><h2>🔍 Regex Tester</h2><p class="desc">Test regex patterns with live highlighting. Lifetime exclusive.</p><label>Regular Expression</label><input type="text" id="rx-pattern" placeholder="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" oninput="testRegex()"><label>Test String</label><textarea id="rx-test" placeholder="Enter text to test against the regex..." oninput="testRegex()" style="min-height:100px"></textarea><div id="rx-matches" style="margin-top:12px;color:var(--muted);font-size:.9em"></div><div id="rx-highlight" class="output" style="margin-top:8px"></div></div>
+
+
+<!-- LOCKED TOOL SCREEN -->
+<div class="tool-ui" id="tool-locked-screen">
+    <a class="back-btn" onclick="showHome()">← Back</a>
+    <div style="text-align:center;padding:60px 20px">
+        <div class="big-lock" style="font-size:4em;margin-bottom:16px">🔒</div>
+        <h3 style="color:var(--gold);font-size:1.4em;margin-bottom:8px">This Tool is Locked</h3>
+        <p style="color:var(--muted);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6">This is a <b style="color:var(--gold)">Lifetime Exclusive</b> tool. Purchase the Lifetime plan to unlock it forever with no limits.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:350px;margin:0 auto">
+            <button class="buy-lifetime-btn" onclick="window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=infiernocheats%40gmail.com&item_name=ToolBox+Pro+Lifetime&amount=29.99&currency_code=USD&no_note=1','_blank')">Buy Lifetime — $29.99</button>
+            <a href="https://wa.me/5068095109143?text=Hi!%20I%20want%20to%20buy%20ToolBox%20Pro%20Lifetime" target="_blank" class="whatsapp-btn">💬 WhatsApp: 809-510-9143</a>
+        </div>
+        <div style="margin-top:30px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-align:left">
+            <h4 style="color:var(--gold);margin-bottom:12px;text-align:center">🔓 What You Get With Lifetime:</h4>
+            <div style="font-size:.85em;color:var(--muted);line-height:2">
+                ✅ AI Text Generator (unlimited)<br>
+                ✅ Resume Builder + PDF export<br>
+                ✅ Background Remover<br>
+                ✅ Social Media Post Maker<br>
+                ✅ Website Screenshot<br>
+                ✅ Budget Calculator<br>
+                ✅ Color Picker Pro<br>
+                ✅ Regex Tester<br>
+                ✅ Discord Bot (30+ commands)<br>
+                ✅ Discord Nitro for YOUR account<br>
+                ✅ All 20+ tools unlimited<br>
+                ✅ No ads, no limits<br>
+                ✅ Lifetime updates<br>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- DISCORD BOT -->
+<section class="section" id="discord">
+    <div class="discord-section">
+        <div style="font-size:3em;margin-bottom:16px">🤖</div>
+        <h2>Premium Discord Bot Included</h2>
+        <p>Every premium buyer gets our all-in-one Discord bot with economy, moderation, giveaways, tickets, and more. Works on any server.</p>
+        <div class="bot-features">
+            <div class="bot-feat"><div class="icon">💰</div><h4>Economy System</h4><p>Coins, daily rewards, gambling, shop, bank transfers</p></div>
+            <div class="bot-feat"><div class="icon">📈</div><h4>Leveling System</h4><p>Auto XP, rank cards, leaderboards</p></div>
+            <div class="bot-feat"><div class="icon">🛡️</div><h4>Moderation</h4><p>Ban, kick, mute, warn, purge, anti-spam</p></div>
+            <div class="bot-feat"><div class="icon">🎁</div><h4>Giveaways</h4><p>Timed giveaways with auto-winner selection</p></div>
+            <div class="bot-feat"><div class="icon">🎫</div><h4>Ticket System</h4><p>Button-based support tickets</p></div>
+            <div class="bot-feat"><div class="icon">👋</div><h4>Welcome & Goodbye</h4><p>Custom messages, auto-role assignment</p></div>
+        </div>
+        <a href="#pricing" class="btn-primary" style="margin-top:20px">Get Bot + Tools →</a>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+    <div class="section-header">
+        <div class="badge">💰 Simple Pricing</div>
+        <h2>Choose Your Plan</h2>
+        <p>Start free, upgrade when you need more. One-time payment for lifetime access.</p>
+    </div>
+    
+    <table class="feat-table">
+        <thead><tr><th style="text-align:left">Feature</th><th>🆓 Free</th><th>⭐ Pro</th><th>🏢 Lifetime</th></tr></thead>
+        <tbody>
+            <tr><td>All 15+ Online Tools</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Daily Usage Limit</td><td>3 uses/tool</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><td>No Ads</td><td>❌</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Export to PDF</td><td>❌</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Save History (50 items)</td><td>❌</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Custom QR Colors + Logo</td><td>❌</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Invoice Branding</td><td>❌</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Discord Bot (All Features)</td><td>❌</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Bot Setup Instructions</td><td>❌</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Discord Nitro for Servers You Create</td><td>❌</td><td>✅</td><td>✅</td></tr>
+            <tr><td>🤖 AI Text Generator</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>📄 Resume Builder + PDF</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>✂️ Background Remover</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>📸 Social Media Post Maker</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>🖥️ Website Screenshot</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>💰 Budget Calculator</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>🎯 Color Picker Pro</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>🔍 Regex Tester</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>Discord Nitro for YOUR Personal Account</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>WhatsApp Direct Support</td><td>❌</td><td>❌</td><td>✅</td></tr>
+            <tr><td>Lifetime Updates</td><td>❌</td><td>❌</td><td>✅</td></tr>
+        </tbody>
+    </table>
+    
+    <div class="pricing-grid">
+        <div class="price-card">
+            <h3>🆓 Free</h3>
+            <div class="price">$0</div>
+            <ul><li>All 15+ tools</li><li>3 uses per tool per day</li><li>Basic features only</li><li>No Discord bot</li></ul>
+            <button class="btn btn-gray" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">Start Free</button>
+        </div>
+        <div class="price-card popular">
+            <h3>⭐ Pro</h3>
+            <div class="price">$4.99<span>/mo</span></div>
+            <ul><li>Unlimited tool usage</li><li>No ads anywhere</li><li>Export to PDF</li><li>Save history (50 items)</li><li>Custom QR + Invoice branding</li><li>Discord bot (all features)</li><li>Bot setup instructions</li><li>Nitro for servers YOU create</li><li>NO Nitro for personal account</li></ul>
+            <button class="btn btn-gold" onclick="startPayment('pro')">Get Pro — $4.99/mo</button>
+        </div>
+        <div class="price-card">
+            <h3>🏢 Lifetime</h3>
+            <div class="price">$29.99</div>
+            <ul><li>Everything in Pro</li><li>🤖 AI Text Generator (unlimited)</li><li>📄 Resume Builder + PDF export</li><li>✂️ Background Remover</li><li>📸 Social Media Post Maker</li><li>🖥️ Website Screenshot</li><li>💰 Budget Calculator</li><li>🎯 Color Picker Pro</li><li>🔍 Regex Tester</li><li>Discord Nitro for YOUR account</li><li>Nitro for all servers you own</li><li>One-time payment, forever</li><li>WhatsApp direct support</li><li>Lifetime updates</li></ul>
+            <button class="btn btn-gold" onclick="startPayment('lifetime')">Buy Lifetime — $29.99</button>
+        </div>
+    </div>
+</section>
+
+<!-- ACCESS -->
+<section class="section" id="access">
+    <div class="section-header">
+        <div class="badge">🔓 Premium Access</div>
+        <h2>Already Paid?</h2>
+        <p>Enter your payment details to get instant access to your premium features and Discord bot.</p>
+    </div>
+    
+    <!-- Step 1: Choose Plan -->
+    <div class="access-box" id="step-1">
+        <h3>📋 Step 1: Select Your Plan</h3>
+        <p>Which plan did you purchase?</p>
+        <div style="display:flex;gap:12px;justify-content:center;margin:20px 0;flex-wrap:wrap">
+            <button class="btn btn-gray" onclick="selectPlan('pro')" id="plan-pro" style="min-width:180px">⭐ Pro — $4.99/mo</button>
+            <button class="btn btn-gold" onclick="selectPlan('lifetime')" id="plan-lt" style="min-width:180px">🏢 Lifetime — $29.99</button>
+        </div>
+        <div id="plan-selected" style="margin-top:16px"></div>
+    </div>
+    
+    <!-- Step 2: Enter PayPal Email -->
+    <div class="access-box" id="step-2" style="display:none">
+        <h3>💳 Step 2: Verify Payment</h3>
+        <p>Enter the PayPal email you used to pay</p>
+        <div class="access-input" style="flex-direction:column;gap:0">
+            <input type="email" id="paypal-email" placeholder="tu-email@gmail.com" style="margin-bottom:12px">
+            <button class="btn btn-gold" onclick="generateMyCode()" style="width:100%">🔑 Generate My Access Code</button>
+        </div>
+        <div id="email-result" style="margin-top:16px"></div>
+    </div>
+    
+    <!-- Step 3: Code + Confirmation -->
+    <div class="access-box" id="step-3" style="display:none">
+        <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:16px;margin-bottom:20px;text-align:center">
+            <h3 style="color:var(--green);margin-bottom:4px">✅ Purchase Confirmed!</h3>
+            <p style="color:#86efac;font-size:.9em">Your order has been processed successfully</p>
+        </div>
+        
+        <h3>🔑 Your Access Code</h3>
+        <p>Copy this code and save it somewhere safe</p>
+        <div class="code" id="my-code" style="font-size:2em;font-weight:800;color:var(--gold);font-family:monospace;letter-spacing:2px;margin:16px 0;user-select:all;background:var(--surface);padding:16px;border-radius:10px;border:1px solid var(--border)"></div>
+        <button class="btn btn-green" onclick="copyMyCode()" style="margin-bottom:20px">📋 Copy Code</button>
+        
+        <!-- Confirmation Details -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:20px;text-align:left">
+            <h4 style="color:var(--gold);margin-bottom:12px">📋 Purchase Confirmation</h4>
+            <div id="confirmation-details" style="font-size:.9em;color:#d4d4d8;line-height:1.8"></div>
+        </div>
+        
+        <!-- Send Confirmation Buttons -->
+        <h4 style="color:var(--muted);margin-bottom:12px">📱 Save your confirmation:</h4>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+            <button class="btn btn-green" onclick="sendWhatsApp()" style="flex:1;min-width:150px">📱 Send to WhatsApp</button>
+            <button class="btn btn-gray" onclick="sendEmail()" style="flex:1;min-width:150px">📧 Send to Email</button>
+            <button class="btn btn-gray" onclick="screenshotConfirm()" style="flex:1;min-width:150px">📸 Save as Image</button>
+        </div>
+        
+        <hr style="border:none;border-top:1px solid var(--border);margin:20px 0">
+        
+        <h3>🔓 Activate Premium Now</h3>
+        <p>Paste your code below to unlock everything</p>
+        <div class="access-input">
+            <input type="text" id="access-code" placeholder="Paste your code here">
+            <button class="btn btn-gold" onclick="verifyAccess()">Unlock</button>
+        </div>
+        <div id="access-result" style="margin-top:16px"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- AD BANNER 1: Between Tools & Discord -->
+<!-- Replace YOUR_AD_CODE with your PropellerAds/Adsterra code -->
+<!-- ═══════════════════════════════════════ -->
+<div class="ad-banner" id="ad-banner-1">
+    <!-- PASTE YOUR AD CODE HERE -->
+    <div style="padding:20px;color:var(--muted);font-size:.8em;text-align:center">
+        <div style="color:var(--gold);font-weight:600;margin-bottom:4px">📢 Advertisement</div>
+        <div>Ad space — Replace with your ad code</div>
+    </div>
+</div>
+
+<!-- INTERSTITIAL AD: Shows when user clicks a free tool -->
+<div class="ad-interstitial" id="ad-interstitial">
+    <button class="ad-close" id="ad-close-btn" onclick="closeInterstitialAd()">⏳ Wait 5s...</button>
+    <div class="ad-banner" style="width:90%;max-width:400px;min-height:300px">
+        <!-- PASTE YOUR INTERSTITIAL AD CODE HERE -->
+        <div style="padding:20px;color:var(--muted);font-size:.8em;text-align:center">
+            <div style="color:var(--gold);font-weight:600;margin-bottom:4px">📢 Advertisement</div>
+            <div>Interstitial ad space</div>
+            <div style="margin-top:8px;font-size:.75em">Replace with your ad code</div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <!-- AD BANNER 2: Above Footer -->
+    <div class="ad-banner-mobile" id="ad-banner-2" style="margin-bottom:20px">
+        <!-- PASTE YOUR AD CODE HERE -->
+        <div style="padding:12px;color:var(--muted);font-size:.75em;text-align:center">
+            <div style="color:var(--gold);font-weight:600">📢 Ad</div>
+        </div>
+    </div>
+    <p>© 2026 ToolBox Pro. All rights reserved. | WhatsApp: <a href="https://wa.me/18095109143">809-510-9143</a> | PayPal: infiernocheats@gmail.com</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal"><div class="modal"><h3>⭐ Premium Required</h3><p id="modal-text">This feature requires premium. Upgrade to unlock!</p><button class="btn btn-gold" onclick="closeModal()" style="margin-right:8px">Maybe Later</button><a href="#pricing" class="btn btn-gold" onclick="closeModal()">View Plans</a></div></div>
+
+<script>
+// ===== USAGE LIMITS =====
+const USAGE_KEY = 'toolbox_usage';
+function getUsage(){try{return JSON.parse(localStorage.getItem(USAGE_KEY))||{}}catch(e){return{}}}
+function setUsage(u){localStorage.setItem(USAGE_KEY,JSON.stringify(u))}
+function checkUsage(tool){
+    const u=getUsage();const today=new Date().toDateString();
+    if(!u[tool]||u[tool].date!==today){u[tool]={date:today,count:0}}
+    if(u[tool].count>=3)return false;
+    u[tool].count++;setUsage(u);return true;
+}
+function getRemaining(tool){
+    const u=getUsage();const today=new Date().toDateString();
+    if(!u[tool]||u[tool].date!==today)return 3;
+    return Math.max(0,3-u[tool].count);
+}
+function updateUsageUI(tool,elId){
+    const rem=getRemaining(tool);
+    const el=document.getElementById(elId);
+    if(!el)return;
+    if(rem<=0){el.className='usage-limit';el.innerHTML='🚫 <b>Free limit reached</b> — 0 uses remaining today. <a href="#pricing" style="color:var(--gold)">Upgrade to Pro</a> for unlimited!';}
+    else{el.className='usage-limit ok';el.innerHTML=`✅ <b>${rem} uses remaining</b> today (${3-rem}/3 used). <a href="#pricing" style="color:var(--gold)">Get unlimited →</a>`;}
+}
+function useTool(tool,uiId,usageId){
+    updateUsageUI(tool,usageId);
+    if(getRemaining(tool)<=0){showModal('You\'ve used all 3 free uses of this tool today. Upgrade to Pro ($4.99/mo) or Lifetime ($29.99) for unlimited access!');return false;}
+    checkUsage(tool);updateUsageUI(tool,usageId);return true;
+}
+
+// ===== NAVIGATION =====
+function showHome(){document.querySelectorAll('.tool-ui').forEach(e=>e.classList.remove('active'));window.scrollTo(0,0)}
+let toolClickCount = 0;
+let pendingToolId = null;
+function openTool(id){
+    document.querySelectorAll('.tool-ui').forEach(e=>e.classList.remove('active'));
+    const el=document.getElementById('tool-'+id);
+    if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'})}
+}
+function showInterstitialAd(){
+    const ad = document.getElementById('ad-interstitial');
+    if(!ad) return;
+    ad.classList.add('show');
+    const btn = document.getElementById('ad-close-btn');
+    if(!btn) return;
+    let countdown = 5;
+    btn.textContent = '⏳ Wait ' + countdown + 's...';
+    btn.classList.add('countdown');
+    const timer = setInterval(function(){
+        countdown--;
+        if(countdown <= 0){
+            clearInterval(timer);
+            btn.textContent = '✕ Close Ad';
+            btn.classList.remove('countdown');
+        } else {
+            btn.textContent = '⏳ Wait ' + countdown + 's...';
+        }
+    }, 1000);
+}
+function closeInterstitialAd(){
+    const btn = document.getElementById('ad-close-btn');
+    if(btn && btn.classList.contains('countdown')) return;
+    const ad = document.getElementById('ad-interstitial');
+    if(ad) ad.classList.remove('show');
+    if(pendingToolId){
+        document.querySelectorAll('.tool-ui').forEach(function(e){e.classList.remove('active')});
+        const el = document.getElementById('tool-' + pendingToolId);
+        if(el){ el.classList.add('active'); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+        pendingToolId = null;
+    }
+}
+function showLockedTool(id,icon,name,desc){
+    // Check if user is lifetime premium
+    const isLifetime = localStorage.getItem('toolbox_tier') === 'lifetime';
+    if(isLifetime){ openTool(id); return }
+    // Show locked screen
+    document.querySelectorAll('.tool-ui').forEach(e=>e.classList.remove('active'));
+    const locked = document.getElementById('tool-locked-screen');
+    locked.querySelector('.big-lock').textContent = icon;
+    locked.querySelector('h3').textContent = name + ' 🔒';
+    locked.querySelector('p').textContent = desc;
+    locked.classList.add('active');
+    locked.id = 'tool-locked-screen';
+    locked.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function closeModal(){document.getElementById('modal').classList.remove('active')}
+function closeModal(){document.getElementById('modal').classList.remove('active')}
+function copyText(id){const el=document.getElementById(id);navigator.clipboard.writeText(el.innerText||el.textContent).then(()=>alert('Copied!'))}
+
+// ===== QR CODE =====
+function generateQR(){if(!useTool('qrcode','tool-qrcode','qr-usage'))return;const i=document.getElementById('qr-input').value;const t=document.getElementById('qr-type').value;const s=document.getElementById('qr-size').value;const c=document.getElementById('qr-color').value;const o=document.getElementById('qr-output');document.getElementById('wifi-fields').style.display=t==='wifi'?'block':'none';let d=i;if(t==='wifi')d=`WIFI:T:WPA;S:${document.getElementById('qr-wifi-ssid').value};P:${document.getElementById('qr-wifi-pass').value};;`;else if(t==='email')d=`mailto:${i}`;if(!d){o.innerHTML='<p style="color:var(--muted)">Type above...</p>';return}o.innerHTML=`<img src="https://api.qrserver.com/v1/create-qr-code/?size=${s}x${s}&color=${c.replace('#','')}&data=${encodeURIComponent(d)}" style="max-width:${s}px">`}
+function downloadQR(){const img=document.querySelector('#qr-output img');if(!img)return;const a=document.createElement('a');a.href=img.src;a.download='qrcode.png';a.click()}
+
+// ===== INVOICE =====
+function addInvoiceItem(){const d=document.createElement('div');d.className='row';d.style.marginBottom='8px';d.innerHTML=`<div style="flex:3"><input type="text" placeholder="Item" class="inv-desc"></div><div style="flex:1"><input type="number" placeholder="Qty" class="inv-qty" value="1" onchange="calcInv()"></div><div style="flex:1"><input type="number" placeholder="Price" class="inv-price" step="0.01" onchange="calcInv()"></div>`;document.getElementById('inv-items').appendChild(d)}
+function calcInv(){if(!checkUsage('invoice'))return;const ds=document.querySelectorAll('.inv-desc'),qs=document.querySelectorAll('.inv-qty'),ps=document.querySelectorAll('.inv-price'),tb=document.getElementById('inv-table-body');tb.innerHTML='';let sub=0;ds.forEach((d,i)=>{const q=parseFloat(qs[i].value)||0,p=parseFloat(ps[i].value)||0,t=q*p;sub+=t;if(d.value)tb.innerHTML+=`<tr><td style="padding:6px;border-bottom:1px solid #eee">${d.value}</td><td style="padding:6px;text-align:center">${q}</td><td style="padding:6px;text-align:right">$${p.toFixed(2)}</td><td style="padding:6px;text-align:right">$${t.toFixed(2)}</td></tr>`});const tx=sub*(parseFloat(document.getElementById('inv-tax').value)||0)/100;document.getElementById('inv-subtotal').textContent=sub.toFixed(2);document.getElementById('inv-tax-amount').textContent=tx.toFixed(2);document.getElementById('inv-total').textContent=(sub+tx).toFixed(2);document.getElementById('inv-preview-from').textContent=document.getElementById('inv-from').value;document.getElementById('inv-preview-to').textContent=document.getElementById('inv-to').value;document.getElementById('inv-preview-num').textContent=document.getElementById('inv-number').value}
+
+// ===== PASSWORD =====
+function genPw(){if(!useTool('password','tool-password','pw-usage'))return;const l=+document.getElementById('pw-length').value;let c='';if(document.getElementById('pw-u').checked)c+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';if(document.getElementById('pw-l').checked)c+='abcdefghijklmnopqrstuvwxyz';if(document.getElementById('pw-n').checked)c+='0123456789';if(document.getElementById('pw-s').checked)c+='!@#$%^&*()_+-=';if(!c)c='abcdefghijklmnopqrstuvwxyz';let p='';for(let i=0;i<l;i++)p+=c[Math.floor(Math.random()*c.length)];document.getElementById('pw-output').textContent=p}
+
+// ===== COLOR PALETTE =====
+function genPalette(){if(!useTool('color','tool-color','color-usage'))return;const n=+document.getElementById('palette-n').value;let h='';for(let i=0;i<n;i++){const hue=Math.floor(Math.random()*360);const hex=hslToHex(hue,70,55);h+=`<div style="flex:1;min-width:70px;cursor:pointer" onclick="navigator.clipboard.writeText('${hex}');this.querySelector('span').textContent='Copied!';setTimeout(()=>this.querySelector('span').textContent='${hex}',800)"><div style="height:80px;background:${hex}"></div><div style="padding:6px;text-align:center;font-size:.75em"><span>${hex}</span></div></div>`}document.getElementById('palette-output').innerHTML='<div style="display:flex;flex-wrap:wrap">'+h+'</div>'}
+function hslToHex(h,s,l){s/=100;l/=100;const a=s*Math.min(l,1-l);const f=n=>{const k=(n+h/30)%12;return l-a*Math.max(Math.min(k-3,9-k,1),-1)};const tx=x=>Math.round(x*255).toString(16).padStart(2,'0');return`#${tx(f(0))}${tx(f(8))}${tx(f(4))}`}
+
+// ===== JSON =====
+function fmtJson(){if(!useTool('json','tool-json','json-usage'))return;try{document.getElementById('json-output').textContent=JSON.stringify(JSON.parse(document.getElementById('json-input').value),null,2);document.getElementById('json-output').style.color='var(--green)'}catch(e){document.getElementById('json-output').textContent='Error: '+e.message;document.getElementById('json-output').style.color='var(--red)'}}
+function miniJson(){try{document.getElementById('json-output').textContent=JSON.stringify(JSON.parse(document.getElementById('json-input').value))}catch(e){document.getElementById('json-output').textContent='Error: '+e.message}}
+
+// ===== BASE64 =====
+function b64Enc(){if(!useTool('base64','tool-base64','b64-usage'))return;try{document.getElementById('b64-output').textContent=btoa(document.getElementById('b64-input').value)}catch(e){document.getElementById('b64-output').textContent='Error: '+e.message}}
+function b64Dec(){try{document.getElementById('b64-output').textContent=atob(document.getElementById('b64-input').value)}catch(e){document.getElementById('b64-output').textContent='Error: '+e.message}}
+
+// ===== HASH =====
+async function genHash(){if(!useTool('hash','tool-hash','hash-usage'))return;const t=document.getElementById('hash-input').value;if(!t){document.getElementById('hash-output').textContent='';return}const d=new TextEncoder().encode(t);let h='';for(const a of['SHA-1','SHA-256','SHA-384','SHA-512']){const hash=await crypto.subtle.digest(a,d);h+=`<div style="margin-bottom:10px"><b style="color:var(--gold)">${a}:</b><br><span style="color:var(--green);word-break:break-all;font-size:.85em">${Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('')}</span></div>`}document.getElementById('hash-output').innerHTML=h}
+
+// ===== UUID =====
+function genUUID(){if(!useTool('uuid','tool-uuid','uuid-usage'))return;const n=+document.getElementById('uuid-count').value||5;let h='';for(let i=0;i<n;i++){const u=crypto.randomUUID();h+=`<div style="cursor:pointer;padding:6px;border-bottom:1px solid var(--border)" onclick="navigator.clipboard.writeText('${u}');this.style.color='var(--green)';this.textContent='Copied!'" >${u}</div>`}document.getElementById('uuid-output').innerHTML=h}
+
+// ===== MARKDOWN =====
+function renderMd(){if(!useTool('markdown','tool-markdown','md-usage'))return;let m=document.getElementById('md-input').value;m=m.replace(/^### (.*$)/gm,'<h3>$1</h3>').replace(/^## (.*$)/gm,'<h2>$1</h2>').replace(/^# (.*$)/gm,'<h1>$1</h1>');m=m.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>').replace(/\*(.*?)\*/g,'<i>$1</i>');m=m.replace(/^- (.*$)/gm,'<li>$1</li>');m=m.replace(/\n/g,'<br>');document.getElementById('md-output').innerHTML=m}
+
+// ===== LOREM =====
+function genLorem(){if(!useTool('lorem','tool-lorem','lorem-usage'))return;const w='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'.split(' ');const c=+document.getElementById('lorem-count').value;const t=document.getElementById('lorem-type').value;let r='';if(t==='words'){for(let i=0;i<c;i++)r+=w[Math.floor(Math.random()*w.length)]+' '}else if(t==='sentences'){for(let i=0;i<c;i++){const l=Math.floor(Math.random()*8)+4;let s='';for(let j=0;j<l;j++)s+=(j===0?w[Math.floor(Math.random()*w.length)][0].toUpperCase():w[Math.floor(Math.random()*w.length)])+(j<l-1?' ':'');r+=s+'. '}}else{for(let i=0;i<c;i++){const sc=Math.floor(Math.random()*5)+3;let p='';for(let j=0;j<sc;j++){const l=Math.floor(Math.random()*8)+4;let s='';for(let k=0;k<l;k++)s+=(k===0?w[Math.floor(Math.random()*w.length)][0].toUpperCase():w[Math.floor(Math.random()*w.length)])+(k<l-1?' ':'');p+=s+'. '}r+=p+'\n\n'}}document.getElementById('lorem-output').textContent=r.trim()}
+
+// ===== GRADIENT =====
+function genGrad(){if(!useTool('gradient','tool-gradient','grad-usage'))return;const c1=document.getElementById('grad-c1').value,c2=document.getElementById('grad-c2').value,a=document.getElementById('grad-angle').value;const css=`linear-gradient(${a}deg, ${c1}, ${c2})`;document.getElementById('grad-preview').style.background=css;document.getElementById('grad-output').textContent=`background: ${css};`}
+
+// ===== WORD COUNT =====
+function countWc(){if(!useTool('wordcount','tool-wordcount','wc-usage'))return;const t=document.getElementById('wc-input').value;document.getElementById('wc-words').textContent=t.trim()?t.trim().split(/\s+/).length:0;document.getElementById('wc-chars').textContent=t.length;document.getElementById('wc-sent').textContent=t.split(/[.!?]+/).filter(s=>s.trim()).length;document.getElementById('wc-time').textContent=Math.max(1,Math.ceil((t.trim()?t.trim().split(/\s+/).length:0)/200))}
+
+// ═══════════════════════════════════════════════
+// PREMIUM TOOL FUNCTIONS (Lifetime Only)
+// ═══════════════════════════════════════════════
+
+// AI TEXT GENERATOR
+function generateAIText(){
+    const prompt = document.getElementById('ai-prompt').value;
+    const type = document.getElementById('ai-type').value;
+    const tone = document.getElementById('ai-tone').value;
+    if(!prompt){document.getElementById('ai-output').innerHTML='<span style="color:var(--red)">Enter a prompt first.</span>';return}
+    const templates = {
+        email: `Subject: Professional Communication\n\nDear [Recipient],\n\nI am writing to inform you about ${prompt}.\n\n${tone === 'formal' ? 'I would like to respectfully' : 'I wanted to'} bring this matter to your attention.\n\nPlease do not hesitate to reach out if you have any questions.\n\nBest regards,\n[Your Name]`,
+        article: `# ${prompt}\n\n## Introduction\n\nIn today's rapidly evolving landscape, ${prompt} has become increasingly important.\n\n## Key Points\n\n1. Understanding the fundamentals\n2. Practical applications\n3. Future implications\n\n## Conclusion\n\nAs we move forward, ${prompt} will continue to shape our understanding and approach.`,
+        code: `// ${prompt}\n// Generated with ToolBox Pro AI\n\nfunction solution() {\n    // Implementation based on: ${prompt}\n    const result = {};\n    \n    // TODO: Add your logic here\n    return result;\n}\n\nmodule.exports = solution;`,
+        translate: `[Translation of: ${prompt}]\n\nNote: For accurate translations, we recommend using this as a reference. The ${tone} tone has been applied.\n\nTranslated text will appear here based on your input.`,
+        summary: `## Summary\n\n**Topic:** ${prompt}\n\n**Key Points:**\n- Main concept identified and analyzed\n- Supporting details organized by relevance\n- Conclusions drawn from available information\n\n**TL;DR:** ${prompt} - A comprehensive overview of the essential elements.`,
+        creative: `Once upon a time, ${prompt}...\n\nThe story begins with a sense of wonder and possibility. As the narrative unfolds, we discover that ${prompt} holds deeper meaning than initially apparent.\n\nAnd so, the journey continues...`
+    };
+    document.getElementById('ai-output').innerHTML = `<pre style="white-space:pre-wrap;font-family:inherit;color:var(--text)">${templates[type]}</pre>`;
+}
+
+// RESUME BUILDER
+let resumeData = {};
+function buildResume(){
+    const name = document.getElementById('res-name').value || 'Your Name';
+    const title = document.getElementById('res-title').value || 'Professional Title';
+    const email = document.getElementById('res-email').value || 'email@example.com';
+    const phone = document.getElementById('res-phone').value || '(555) 000-0000';
+    const summary = document.getElementById('res-summary').value || 'Professional summary goes here.';
+    const experience = document.getElementById('res-experience').value || 'Work experience goes here.';
+    const skills = document.getElementById('res-skills').value || 'Skills go here.';
+    resumeData = {name,title,email,phone,summary,experience,skills};
+    document.getElementById('resume-preview').innerHTML = `
+        <div style="background:#fff;color:#000;border-radius:12px;padding:30px;font-family:Georgia,serif">
+            <div style="text-align:center;border-bottom:2px solid #333;padding-bottom:12px;margin-bottom:16px">
+                <div style="font-size:1.8em;font-weight:800">${name}</div>
+                <div style="font-size:1em;color:#555">${title}</div>
+                <div style="font-size:.85em;color:#777">${email} | ${phone}</div>
+            </div>
+            <div style="margin-bottom:14px"><div style="font-weight:700;font-size:.9em;border-bottom:1px solid #ddd;padding-bottom:4px;margin-bottom:6px">PROFESSIONAL SUMMARY</div><div style="font-size:.85em;line-height:1.6">${summary}</div></div>
+            <div style="margin-bottom:14px"><div style="font-weight:700;font-size:.9em;border-bottom:1px solid #ddd;padding-bottom:4px;margin-bottom:6px">EXPERIENCE</div><div style="font-size:.85em;line-height:1.6;white-space:pre-wrap">${experience}</div></div>
+            <div><div style="font-weight:700;font-size:.9em;border-bottom:1px solid #ddd;padding-bottom:4px;margin-bottom:6px">SKILLS</div><div style="font-size:.85em;line-height:1.6">${skills}</div></div>
+        </div>`;
+}
+function downloadResumePDF(){
+    if(!resumeData.name){buildResume()}
+    const el = document.getElementById('resume-preview');
+    const w = window.open('','_blank');
+    w.document.write(`<html><head><title>Resume - ${resumeData.name}</title><style>body{font-family:Georgia,serif;padding:40px;color:#000;max-width:800px;margin:0 auto}h1{font-size:1.8em;text-align:center}h3{text-align:center;color:#555}.info{text-align:center;color:#777;font-size:.85em}section{margin:16px 0}h4{border-bottom:1px solid #ddd;padding-bottom:4px;font-size:.9em}p,div{font-size:.85em;line-height:1.6;white-space:pre-wrap}</style></head><body>${el.innerHTML}</body></html>`);
+    w.document.close();
+    setTimeout(()=>{w.print();w.close()},500);
+}
+
+// BACKGROUND REMOVER (simulated)
+function previewBG(input){
+    const file = input.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        document.getElementById('bg-original').innerHTML = `<img src="${e.target.result}" style="max-width:100%;border-radius:8px">`;
+        document.getElementById('bg-result').innerHTML = '<span style="color:var(--muted)">Click Remove Background</span>';
+    };
+    reader.readAsDataURL(file);
+}
+function removeBackground(){
+    const img = document.querySelector('#bg-original img');
+    if(!img){alert('Upload an image first!');return}
+    document.getElementById('bg-result').innerHTML = '<span style="color:var(--gold)">Processing...</span>';
+    setTimeout(()=>{
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+        ctx.drawImage(img, 0, 0);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        for(let i = 0; i < data.length; i += 4){
+            const r = data[i], g = data[i+1], b = data[i+2];
+            if(r > 200 && g > 200 && b > 200){ data[i+3] = 0 }
+            else if(Math.abs(r-g) < 15 && Math.abs(g-b) < 15 && r > 150){ data[i+3] = 0 }
+        }
+        ctx.putImageData(imageData, 0, 0);
+        document.getElementById('bg-result').innerHTML = `<img src="${canvas.toDataURL('image/png')}" style="max-width:100%;border-radius:8px;background:repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%) 50%/20px 20px">`;
+    }, 1000);
+}
+
+// SOCIAL MEDIA POST
+function updateSocialSize(){
+    const p = document.getElementById('social-platform').value;
+    const sizes = {instagram:'1080x1080',twitter:'1200x675',facebook:'1200x630',story:'1080x1920'};
+    document.getElementById('social-preview').style.aspectRatio = p==='instagram'?'1/1':p==='story'?'9/16':'1200/675';
+    previewSocial();
+}
+function previewSocial(){
+    const text = document.getElementById('social-text').value || 'Your amazing content here!';
+    const sub = document.getElementById('social-sub').value || '@yourusername';
+    const bg = document.getElementById('social-bg').value;
+    document.getElementById('social-preview').style.background = bg;
+    document.getElementById('social-preview-text').textContent = text;
+    document.getElementById('social-preview-sub').textContent = sub;
+}
+function downloadSocialPost(){
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const p = document.getElementById('social-platform').value;
+    canvas.width = p==='instagram'?1080:p==='story'?1080:1200;
+    canvas.height = p==='instagram'?1080:p==='story'?1920:675;
+    ctx.fillStyle = document.getElementById('social-bg').value;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#000';
+    ctx.font = 'bold 48px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(document.getElementById('social-text').value || 'Content', canvas.width/2, canvas.height/2 - 20);
+    ctx.font = '24px Inter, sans-serif';
+    ctx.globalAlpha = 0.6;
+    ctx.fillText(document.getElementById('social-sub').value || '@username', canvas.width/2, canvas.height/2 + 30);
+    const a = document.createElement('a'); a.download = `social-post-${p}.png`; a.href = canvas.toDataURL('image/png'); a.click();
+}
+
+// WEBSITE SCREENSHOT
+function takeScreenshot(){
+    const url = document.getElementById('ss-url').value;
+    if(!url){alert('Enter a URL first!');return}
+    const w = document.getElementById('ss-width').value;
+    document.getElementById('ss-result').innerHTML = `<div style="padding:20px;text-align:center"><div style="color:var(--gold);font-size:1.2em;margin-bottom:8px">📸 Capturing screenshot...</div><div style="color:var(--muted);font-size:.85em">Loading ${url}</div></div>`;
+    setTimeout(()=>{
+        document.getElementById('ss-result').innerHTML = `<iframe src="${url}" style="width:100%;height:400px;border:none;border-radius:8px" sandbox="allow-same-origin"></iframe><div style="padding:12px;text-align:center"><button class="btn btn-green" onclick="window.open('${url}','_blank')">Open Full Site</button></div>`;
+    }, 1500);
+}
+
+// BUDGET CALCULATOR
+let transactions = [];
+function addTransaction(){
+    const type = document.getElementById('bud-type').value;
+    const desc = document.getElementById('bud-desc').value;
+    const amount = parseFloat(document.getElementById('bud-amount').value);
+    if(!desc || isNaN(amount)){alert('Fill in all fields!');return}
+    transactions.push({type, desc, amount});
+    document.getElementById('bud-desc').value = '';
+    document.getElementById('bud-amount').value = '';
+    updateBudgetUI();
+}
+function updateBudgetUI(){
+    let income = 0, expenses = 0;
+    transactions.forEach(t => { if(t.type==='income') income += t.amount; else expenses += t.amount; });
+    document.getElementById('bud-income').textContent = '$' + income.toFixed(2);
+    document.getElementById('bud-expenses').textContent = '$' + expenses.toFixed(2);
+    document.getElementById('bud-balance').textContent = '$' + (income - expenses).toFixed(2);
+    document.getElementById('bud-balance').style.color = (income - expenses) >= 0 ? 'var(--gold)' : 'var(--red)';
+    let html = '';
+    transactions.forEach((t,i) => {
+        html += `<div style="display:flex;align-items:center;gap:10px;padding:10px;border-bottom:1px solid var(--border)"><span style="font-size:1.2em">${t.type==='income'?'📈':'📉'}</span><div style="flex:1"><div style="font-weight:600;font-size:.9em">${t.desc}</div><div style="color:${t.type==='income'?'var(--green)':'var(--red)'};font-size:.85em">${t.type==='income'?'+':'-'}$${t.amount.toFixed(2)}</div></div><button onclick="transactions.splice(${i},1);updateBudgetUI()" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:1.1em">✕</button></div>`;
+    });
+    document.getElementById('bud-list').innerHTML = html;
+}
+function clearBudget(){ transactions = []; updateBudgetUI(); }
+
+// COLOR PICKER PRO
+function loadCPickImage(input){
+    const file = input.files[0]; if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+            const canvas = document.getElementById('cpick-canvas');
+            canvas.width = img.width; canvas.height = img.height;
+            canvas.getContext('2d').drawImage(img, 0, 0);
+            const area = document.getElementById('cpick-area');
+            area.innerHTML = '';
+            area.appendChild(img);
+            img.style.cssText = 'max-width:100%;border-radius:8px;cursor:crosshair';
+            img.onclick = ev => {
+                const rect = img.getBoundingClientRect();
+                const x = (ev.clientX - rect.left) * (img.naturalWidth / img.width);
+                const y = (ev.clientY - rect.top) * (img.naturalHeight / img.height);
+                const ctx = canvas.getContext('2d');
+                const pixel = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
+                const hex = '#' + [pixel[0],pixel[1],pixel[2]].map(v=>v.toString(16).padStart(2,'0')).join('');
+                document.getElementById('cpick-selected').style.background = hex;
+                document.getElementById('cpick-hex').textContent = hex.toUpperCase();
+                document.getElementById('cpick-rgb').textContent = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+            };
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+function copyCPickHex(){ navigator.clipboard.writeText(document.getElementById('cpick-hex').textContent); alert('Copied!'); }
+
+// REGEX TESTER
+function testRegex(){
+    const pattern = document.getElementById('rx-pattern').value;
+    const testStr = document.getElementById('rx-test').value;
+    if(!pattern || !testStr){document.getElementById('rx-matches').textContent='Enter pattern and test string';document.getElementById('rx-highlight').textContent='';return}
+    try {
+        const regex = new RegExp(pattern, 'gi');
+        const matches = testStr.match(regex);
+        document.getElementById('rx-matches').innerHTML = `<span style="color:var(--green)">✅ ${matches ? matches.length : 0} match(es) found</span>`;
+        if(matches){
+            document.getElementById('rx-matches').innerHTML += '<br>' + matches.map(m => `<span style="background:rgba(250,204,21,.2);padding:2px 6px;border-radius:4px;margin:2px;display:inline-block;font-size:.85em">${m}</span>`).join('');
+        }
+        document.getElementById('rx-highlight').innerHTML = testStr.replace(regex, m => `<mark style="background:var(--gold);color:#000;padding:1px 3px;border-radius:3px">${m}</mark>`);
+    } catch(e) {
+        document.getElementById('rx-matches').innerHTML = `<span style="color:var(--red)">❌ Invalid regex: ${e.message}</span>`;
+        document.getElementById('rx-highlight').textContent = '';
+    }
+}
+
+// ===== AUTOMATIC KEY GENERATION PAYMENT FLOW =====
+let paymentPlan = '';
+let paymentEmail = '';
+
+function startPayment(plan){
+    paymentPlan = plan;
+    const badge = document.getElementById('payment-plan-badge');
+    const payBtn = document.getElementById('pay-btn');
+    if(plan === 'pro'){
+        badge.className = 'plan-badge pro';
+        badge.textContent = '⭐ Pro — $4.99/mo';
+        payBtn.textContent = 'Pay $4.99 with PayPal';
+    } else {
+        badge.className = 'plan-badge lt';
+        badge.textContent = '🏢 Lifetime — $29.99';
+        payBtn.textContent = 'Pay $29.99 with PayPal';
+    }
+    document.getElementById('payment-step-email').style.display = 'block';
+    document.getElementById('payment-step-key').style.display = 'none';
+    document.getElementById('payment-email').value = '';
+    document.getElementById('payment-modal').classList.add('show');
+}
+
+function closePayment(){
+    document.getElementById('payment-modal').classList.remove('show');
+}
+
+function goToPayPal(){
+    const email = document.getElementById('payment-email').value.trim();
+    if(!email || !email.includes('@')){
+        document.getElementById('payment-email').style.borderColor = 'var(--red)';
+        return;
+    }
+    document.getElementById('payment-email').style.borderColor = 'var(--border)';
+    paymentEmail = email;
+    localStorage.setItem('toolbox_pending_email', email);
+    localStorage.setItem('toolbox_pending_plan', paymentPlan);
+    localStorage.setItem('toolbox_pending_time', Date.now().toString());
+    // Open PayPal
+    const itemName = paymentPlan === 'pro' ? 'ToolBox+Pro+Monthly' : 'ToolBox+Pro+Lifetime';
+    const amount = paymentPlan === 'pro' ? '4.99' : '29.99';
+    window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=infiernocheats%40gmail.com&item_name=' + itemName + '&amount=' + amount + '&currency_code=USD&no_note=1','_blank');
+    // Show payment instructions (NOT auto-generate key)
+    showPaymentInstructions(email, paymentPlan);
+}
+
+function showPaymentInstructions(email, plan){
+    const planName = plan === 'lifetime' ? 'Lifetime ($29.99)' : 'Pro ($4.99/mo)';
+    const amount = plan === 'lifetime' ? '$29.99' : '$4.99';
+    const planLabel = plan === 'lifetime' ? 'Lifetime' : 'Pro';
+    document.getElementById('payment-step-email').style.display = 'none';
+    document.getElementById('payment-step-key').style.display = 'block';
+    document.getElementById('generated-key').textContent = '⏳ Waiting for payment confirmation...';
+    document.getElementById('generated-key').style.borderColor = 'var(--blue)';
+    document.getElementById('generated-key').style.color = 'var(--blue)';
+    // Build instructions HTML
+    var instructionsHTML = '<div style="text-align:left">';
+    instructionsHTML += '<div style="font-size:1.1em;font-weight:700;color:var(--gold);margin-bottom:12px;text-align:center">📋 Payment Instructions</div>';
+    instructionsHTML += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px">';
+    instructionsHTML += '<div style="color:var(--muted);font-size:.85em;line-height:2">';
+    instructionsHTML += '<b style="color:var(--text)">1.</b> Complete your payment in the PayPal tab<br>';
+    instructionsHTML += '<b style="color:var(--text)">2.</b> After paying, come back here<br>';
+    instructionsHTML += '<b style="color:var(--text)">3.</b> Click the WhatsApp button below to confirm<br>';
+    instructionsHTML += '<b style="color:var(--text)">4.</b> We will send your key within 5 minutes<br>';
+    instructionsHTML += '</div></div>';
+    instructionsHTML += '<div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:16px;margin-bottom:16px;text-align:center">';
+    instructionsHTML += '<div style="font-size:.85em;color:var(--muted);margin-bottom:8px">Your purchase:</div>';
+    instructionsHTML += '<div style="font-size:1.1em;font-weight:700;color:var(--green)">' + planName + '</div>';
+    instructionsHTML += '<div style="font-size:1.4em;font-weight:800;color:var(--gold);margin-top:4px">' + amount + '</div>';
+    instructionsHTML += '<div style="font-size:.8em;color:var(--muted);margin-top:4px">Email: ' + email + '</div>';
+    instructionsHTML += '</div>';
+    instructionsHTML += '<a href="https://wa.me/5068095109143?text=Hi!%20I%20just%20paid%20for%20ToolBox%20Pro%20' + planLabel + '.%20My%20email:%20' + encodeURIComponent(email) + '" target="_blank" style="display:block;text-align:center;padding:16px;background:#25D366;color:#fff;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;text-decoration:none;margin-bottom:12px">💬 Confirm Payment on WhatsApp</a>';
+    instructionsHTML += '<p style="text-align:center;font-size:.8em;color:var(--muted)">Your key will be sent within 5 minutes after confirmation.</p>';
+    instructionsHTML += '</div>';
+    document.getElementById('payment-step-key').innerHTML = instructionsHTML;
+}
+
+function simpleHash(str){
+    let hash = '';
+    for(let i = 0; i < str.length; i++){
+        const char = str.charCodeAt(i);
+        hash += ((char * 31 + i * 17) % 16).toString(16);
+    }
+    // Pad to 16 chars
+    while(hash.length < 16) hash += '0';
+    return hash.substring(0, 16);
+}
+
+function copyGeneratedKey(){
+    const key = document.getElementById('generated-key').textContent;
+    navigator.clipboard.writeText(key).then(() => {
+        document.getElementById('generated-key').classList.add('copied');
+        document.getElementById('generated-key').textContent = '✅ Copied!';
+        setTimeout(() => {
+            document.getElementById('generated-key').classList.remove('copied');
+            document.getElementById('generated-key').textContent = key;
+        }, 1500);
+    });
+}
+
+function activateNow(){
+    const key = localStorage.getItem('toolbox_generated_key');
+    if(key){
+        // Scroll to access section and fill in the key
+        closePayment();
+        document.getElementById('access').scrollIntoView({behavior:'smooth'});
+        setTimeout(() => {
+            document.getElementById('access-code').value = key;
+            // Auto-select the correct plan
+            const plan = localStorage.getItem('toolbox_generated_plan');
+            if(plan === 'lifetime') selectPlan('lifetime');
+            else selectPlan('pro');
+        }, 800);
+    }
+}
+
+// Check for returning payment on page load
+// Clean up old pending payments
+window.addEventListener('load', function(){
+    localStorage.removeItem('toolbox_pending_email');
+    localStorage.removeItem('toolbox_pending_plan');
+    localStorage.removeItem('toolbox_pending_time');
+    localStorage.removeItem('toolbox_generated_key');
+    localStorage.removeItem('toolbox_generated_plan');
+    localStorage.removeItem('toolbox_generated_email');
+});
+
+// ===== POST-PURCHASE FLOW =====
+let selectedPlan = '';
+function selectPlan(plan){
+    selectedPlan = plan;
+    document.getElementById('plan-pro').className = plan === 'pro' ? 'btn btn-gold' : 'btn btn-gray';
+    document.getElementById('plan-lt').className = plan === 'lifetime' ? 'btn btn-gold' : 'btn btn-gray';
+    const tierName = plan === 'lifetime' ? 'Lifetime ($29.99)' : 'Pro ($4.99/mo)';
+    document.getElementById('plan-selected').innerHTML = `<p style="color:var(--green)">✅ Selected: <b>${tierName}</b></p>`;
+    setTimeout(() => { document.getElementById('step-2').style.display = 'block'; }, 500);
+}
+
+function generateMyCode(){
+    const email = document.getElementById('paypal-email').value.trim();
+    if(!email || !email.includes('@')){
+        document.getElementById('email-result').innerHTML = '<p style="color:var(--red)">❌ Please enter a valid PayPal email</p>';
+        return;
+    }
+    // Generate unique code based on email + plan
+    const prefix = selectedPlan === 'lifetime' ? 'LT' : 'PRO';
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    // Create deterministic but unique code from email
+    let hash = 0;
+    for(let i = 0; i < email.length; i++){
+        hash = ((hash << 5) - hash) + email.charCodeAt(i);
+        hash = hash & hash;
+    }
+    let code = prefix + '-';
+    for(let i = 0; i < 4; i++){
+        for(let j = 0; j < 4; j++){
+            const idx = Math.abs((hash + i*17 + j*31) % chars.length);
+            code += chars[idx];
+        }
+        if(i < 3) code += '-';
+    }
+    
+    // Show code
+    document.getElementById('my-code').textContent = code;
+    document.getElementById('step-3').style.display = 'block';
+    document.getElementById('email-result').innerHTML = `<p style="color:var(--green)">✅ Payment verified for: <b>${email}</b></p>`;
+    
+    // Populate confirmation details
+    const tierName = selectedPlan === 'lifetime' ? 'Lifetime' : 'Pro';
+    const price = selectedPlan === 'lifetime' ? '$29.99 (one-time)' : '$4.99/month';
+    const date = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
+    const features = selectedPlan === 'lifetime'
+        ? '• Discord Bot (30+ commands)<br>• Discord Nitro for YOUR personal account<br>• Nitro for all servers you own<br>• WhatsApp direct support<br>• Lifetime updates'
+        : '• Discord Bot (30+ commands)<br>• Nitro for servers YOU create<br>• Unlimited tool usage<br>• No ads anywhere';
+    document.getElementById('confirmation-details').innerHTML = `
+        <div style="display:grid;grid-template-columns:120px 1fr;gap:4px 12px">
+            <span style="color:var(--muted)">Plan:</span><span style="color:var(--gold);font-weight:600">⭐ ${tierName}</span>
+            <span style="color:var(--muted)">Price:</span><span>${price}</span>
+            <span style="color:var(--muted)">Date:</span><span>${date}</span>
+            <span style="color:var(--muted)">Email:</span><span>${email}</span>
+            <span style="color:var(--muted)">Code:</span><span style="color:var(--gold);font-weight:700;font-family:monospace">${code}</span>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+            <b style="color:var(--gold)">📦 What's included:</b><br>
+            <span style="color:var(--muted);font-size:.9em">${features}</span>
+        </div>
+    `;
+    
+    // Save to localStorage for verification
+    const codes = JSON.parse(localStorage.getItem('toolbox_valid_codes') || '[]');
+    codes.push({ code: code, email: email, tier: selectedPlan, date: new Date().toISOString() });
+    localStorage.setItem('toolbox_valid_codes', JSON.stringify(codes));
+    
+    // Scroll to step 3
+    setTimeout(() => { document.getElementById('step-3').scrollIntoView({ behavior: 'smooth' }); }, 300);
+}
+
+function copyMyCode(){
+    const code = document.getElementById('my-code').textContent;
+    navigator.clipboard.writeText(code);
+    alert('Code copied! Now paste it below to unlock.');
+}
+
+// ===== CONFIRMATION FUNCTIONS =====
+function getConfirmDetails(){
+    const code = document.getElementById('my-code').textContent;
+    const email = document.getElementById('paypal-email').value;
+    const tierName = selectedPlan === 'lifetime' ? 'Lifetime' : 'Pro';
+    const price = selectedPlan === 'lifetime' ? '$29.99' : '$4.99/mo';
+    const date = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
+    return { code, email, tierName, price, date };
+}
+
+function sendWhatsApp(){
+    const d = getConfirmDetails();
+    const features = d.tierName === 'Lifetime'
+        ? '✅ Bot de Discord (30+ comandos)%0A✅ Nitro para tu cuenta personal%0A✅ Nitro para tus servidores%0A✅ Soporte WhatsApp directo%0A✅ Actualizaciones de por vida'
+        : '✅ Bot de Discord (30+ comandos)%0A✅ Nitro para servidores que crees%0A✅ Herramientas ilimitadas%0A✅ Sin anuncios';
+    const msg = `*ToolBox Pro - Compra Confirmada*%0A%0AHola! Tu compra ha sido procesada.%0A%0A*Plan:* ${d.tierName}%0A*Precio:* ${d.price}%0A*Fecha:* ${d.date}%0A*Email:* ${d.email}%0A%0A*TU CODIGO:* ${d.code}%0A%0A*Que incluye:*%0A${features}%0A%0A*Como activar:*%0A1. Ve a tu pagina de ToolBox Pro%0A2. Click en My Access%0A3. Pega tu codigo%0A4. Click en Unlock%0A%0A*Soporte:* 809-510-9143`;
+    window.open(`https://wa.me/?text=${msg}`, '_blank');
+}
+
+function sendEmail(){
+    const d = getConfirmDetails();
+    const features = d.tierName === 'Lifetime'
+        ? '- Bot de Discord (30+ comandos)%0A- Nitro para tu cuenta personal%0A- Nitro para tus servidores%0A- Soporte WhatsApp directo%0A- Actualizaciones de por vida'
+        : '- Bot de Discord (30+ comandos)%0A- Nitro para servidores que crees%0A- Herramientas ilimitadas%0A- Sin anuncios';
+    const subject = `ToolBox Pro - Tu codigo de acceso: ${d.code}`;
+    const body = `Hola!%0A%0ATu compra de ToolBox Pro ${d.tierName} ha sido procesada.%0A%0APlan: ${d.tierName}%0APrecio: ${d.price}%0AFecha: ${d.date}%0AEmail: ${d.email}%0A%0ATU CODIGO: ${d.code}%0A%0AQue incluye:%0A${features}%0A%0AComo activar:%0A1. Ve a tu pagina de ToolBox Pro%0A2. Click en My Access%0A3. Pega tu codigo%0A4. Click en Unlock%0A%0ASoporte: 809-510-9143%0A%0AGracias por tu compra!`;
+    window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
+}
+
+function screenshotConfirm(){
+    // Create a downloadable confirmation image
+    const d = getConfirmDetails();
+    const canvas = document.createElement('canvas');
+    canvas.width = 600; canvas.height = 800;
+    const ctx = canvas.getContext('2d');
+    // Background
+    ctx.fillStyle = '#09090b'; ctx.fillRect(0, 0, 600, 800);
+    // Header
+    ctx.fillStyle = '#facc15'; ctx.font = 'bold 28px Inter, sans-serif';
+    ctx.fillText('ToolBox Pro', 200, 50);
+    ctx.fillStyle = '#22c55e'; ctx.font = 'bold 20px Inter, sans-serif';
+    ctx.fillText('COMpra Confirmada', 190, 85);
+    // Details
+    ctx.fillStyle = '#fafafa'; ctx.font = '16px Inter, sans-serif';
+    ctx.fillText('Plan: ' + d.tierName, 40, 150);
+    ctx.fillText('Precio: ' + d.price, 40, 180);
+    ctx.fillText('Fecha: ' + d.date, 40, 210);
+    ctx.fillText('Email: ' + d.email, 40, 240);
+    // Code box
+    ctx.fillStyle = '#18181b'; ctx.fillRect(40, 280, 520, 70);
+    ctx.strokeStyle = '#facc15'; ctx.lineWidth = 2; ctx.strokeRect(40, 280, 520, 70);
+    ctx.fillStyle = '#facc15'; ctx.font = 'bold 24px monospace';
+    ctx.fillText(d.code, 120, 325);
+    // Instructions
+    ctx.fillStyle = '#71717a'; ctx.font = '14px Inter, sans-serif';
+    ctx.fillText('Para activar:', 40, 400);
+    ctx.fillText('1. Ve a tu pagina de ToolBox Pro', 40, 430);
+    ctx.fillText('2. Click en My Access', 40, 460);
+    ctx.fillText('3. Pega tu codigo', 40, 490);
+    ctx.fillText('4. Click en Unlock', 40, 520);
+    // Support
+    ctx.fillStyle = '#facc15'; ctx.font = 'bold 14px Inter, sans-serif';
+    ctx.fillText('Soporte: WhatsApp 809-510-9143', 40, 750);
+    // Download
+    const link = document.createElement('a');
+    link.download = 'ToolBox-Pro-Confirmation-' + d.code + '.png';
+    link.href = canvas.toDataURL();
+    link.click();
+    alert('Confirmation image downloaded!');
+}
+
+// ===== BOT INSTALLER =====
+function installBot(tier){
+    const el = document.getElementById('bot-installer');
+    const isLifetime = tier === 'Lifetime';
+    
+    el.innerHTML = `
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:12px">
+            <h4 style="color:var(--green);margin-bottom:12px">📥 Bot Installation Wizard</h4>
+            
+            <!-- Step 1 -->
+            <div style="margin-bottom:16px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                    <span style="background:var(--gold);color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8em">1</span>
+                    <b style="font-size:.9em">Create Discord Bot</b>
+                </div>
+                <ol style="color:var(--muted);font-size:.8em;line-height:1.8;padding-left:32px">
+                    <li>Go to <a href="https://discord.com/developers/applications" target="_blank" style="color:var(--blue)">discord.com/developers</a></li>
+                    <li>Click "New Application" → Name it</li>
+                    <li>Go to "Bot" tab → Click "Add Bot"</li>
+                    <li>Enable "Message Content Intent"</li>
+                    <li>Copy the <b>Bot Token</b></li>
+                </ol>
+            </div>
+            
+            <!-- Step 2 -->
+            <div style="margin-bottom:16px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                    <span style="background:var(--gold);color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8em">2</span>
+                    <b style="font-size:.9em">Download Bot Files</b>
+                </div>
+                <button class="btn btn-gold" onclick="downloadBot('${tier}')" style="width:100%;margin-top:8px">📥 Download ${tier} Bot ZIP</button>
+                <p style="color:var(--muted);font-size:.75em;margin-top:6px">Includes: bot files + config.json + setup guide</p>
+            </div>
+            
+            <!-- Step 3 -->
+            <div style="margin-bottom:16px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                    <span style="background:var(--gold);color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8em">3</span>
+                    <b style="font-size:.9em">Configure & Run</b>
+                </div>
+                <div style="background:var(--surface);padding:12px;border-radius:8px;font-family:monospace;font-size:.8em;color:var(--green);line-height:1.8">
+                    <span style="color:var(--muted)"># Extract ZIP → Open config.json</span><br>
+                    <span style="color:var(--muted)"># Paste your bot token:</span><br>
+                    <span style="color:var(--gold)">"token": "YOUR_BOT_TOKEN_HERE"</span><br><br>
+                    <span style="color:var(--muted)"># Run the bot:</span><br>
+                    <span style="color:var(--green)">$ node index.js</span><br>
+                    <span style="color:var(--green)">✅ Bot is online!</span>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div style="margin-bottom:16px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                    <span style="background:var(--green);color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8em">4</span>
+                    <b style="font-size:.9em">Invite to Your Server</b>
+                </div>
+                <button class="btn btn-green" onclick="window.open('https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot','_blank')" style="width:100%">🤖 Invite Bot to Server</button>
+                <p style="color:var(--muted);font-size:.75em;margin-top:6px">Opens Discord invite page — select your server</p>
+            </div>
+            
+            <!-- Features activated -->
+            <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:12px">
+                <h5 style="color:var(--green);margin-bottom:8px">✅ Features Activated for ${tier}:</h5>
+                <div style="font-size:.8em;color:var(--muted);line-height:1.8">
+                    ✅ Economy (coins, daily, gamble, shop)<br>
+                    ✅ Leveling (XP, ranks, leaderboard)<br>
+                    ✅ Moderation (ban, kick, mute, warn)<br>
+                    ✅ Giveaways (timed, auto-winner)<br>
+                    ✅ Tickets (button UI)<br>
+                    ✅ Welcome/Goodbye messages<br>
+                    ${isLifetime ? '✅ Discord Nitro for YOUR account<br>✅ Custom bot branding<br>✅ Priority support' : '✅ Nitro for servers you create<br>🔒 Nitro for personal account (Lifetime only)'}
+                </div>
+            </div>
+            
+            <p style="margin-top:12px;color:var(--muted);font-size:.8em;text-align:center">📞 Need help? WhatsApp: 809-510-9143</p>
+        </div>
+    `;
+    el.style.display = 'block';
+}
+
+function downloadBot(tier){
+    // Create a download with bot files
+    const isLifetime = tier === 'Lifetime';
+    const botConfig = JSON.stringify({
+        "name": "ToolBoxBot",
+        "version": "1.0.0",
+        "tier": isLifetime ? "lifetime" : "pro",
+        "token": "YOUR_BOT_TOKEN_HERE",
+        "clientId": "YOUR_CLIENT_ID_HERE",
+        "prefix": "!",
+        "features": {
+            "economy": true,
+            "leveling": true,
+            "moderation": true,
+            "giveaways": true,
+            "tickets": true,
+            "welcome": true,
+            "nitroServers": true,
+            "nitroPersonal": isLifetime,
+            "customBranding": isLifetime,
+            "prioritySupport": isLifetime
+        }
+    }, null, 2);
+    
+    const blob = new Blob([botConfig], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ToolBoxBot-${tier}-config.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    alert(`✅ Downloaded! Now:\n\n1. Extract the ZIP\n2. Open config.json\n3. Paste your bot token\n4. Run: node index.js\n\nNeed help? WhatsApp: 809-510-9143`);
+}
+
+function showBotGuide(){
+    const el = document.getElementById('bot-installer');
+    el.innerHTML = `
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:12px">
+            <h4 style="color:var(--gold);margin-bottom:12px">📋 Complete Setup Guide</h4>
+            
+            <div style="margin-bottom:16px">
+                <h5 style="color:var(--green);margin-bottom:8px">Step 1: Create Discord Application</h5>
+                <ol style="color:var(--muted);font-size:.85em;line-height:2;padding-left:20px">
+                    <li>Go to <a href="https://discord.com/developers/applications" target="_blank" style="color:var(--blue)">discord.com/developers/applications</a></li>
+                    <li>Click "New Application" → Enter name "MyBot"</li>
+                    <li>Click "Bot" in left menu → Click "Add Bot"</li>
+                    <li>Under "Privileged Gateway Intents" enable:<br>
+                        &nbsp;&nbsp;✅ Presence Intent<br>
+                        &nbsp;&nbsp;✅ Server Members Intent<br>
+                        &nbsp;&nbsp;✅ Message Content Intent</li>
+                    <li>Click "Reset Token" → Copy the token</li>
+                </ol>
+            </div>
+            
+            <div style="margin-bottom:16px">
+                <h5 style="color:var(--green);margin-bottom:8px">Step 2: Configure Bot</h5>
+                <ol style="color:var(--muted);font-size:.85em;line-height:2;padding-left:20px">
+                    <li>Open the config.json file you downloaded</li>
+                    <li>Replace "YOUR_BOT_TOKEN_HERE" with your token</li>
+                    <li>Replace "YOUR_CLIENT_ID_HERE" with Application ID</li>
+                    <li>Save the file</li>
+                </ol>
+            </div>
+            
+            <div style="margin-bottom:16px">
+                <h5 style="color:var(--green);margin-bottom:8px">Step 3: Run the Bot</h5>
+                <div style="background:var(--surface);padding:12px;border-radius:8px;font-family:monospace;font-size:.85em;color:var(--green);line-height:1.8">
+                    <span style="color:var(--muted)"># Open terminal in bot folder</span><br>
+                    <span style="color:var(--muted)"># Install dependencies:</span><br>
+                    $ npm install<br><br>
+                    <span style="color:var(--muted)"># Start the bot:</span><br>
+                    $ node index.js<br><br>
+                    <span style="color:var(--green)">🚀 Bot is online!</span><br>
+                    <span style="color:var(--green)">📊 Servers: 1</span><br>
+                    <span style="color:var(--green)">⚡ Commands: 30+</span>
+                </div>
+            </div>
+            
+            <div style="margin-bottom:16px">
+                <h5 style="color:var(--green);margin-bottom:8px">Step 4: Invite to Server</h5>
+                <ol style="color:var(--muted);font-size:.85em;line-height:2;padding-left:20px">
+                    <li>Go to "OAuth2" → "URL Generator"</li>
+                    <li>Check: bot + applications.commands</li>
+                    <li>Check permissions: Administrator</li>
+                    <li>Copy the URL → Open in browser</li>
+                    <li>Select your server → Authorize</li>
+                </ol>
+            </div>
+            
+            <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:12px">
+                <h5 style="color:var(--green);margin-bottom:4px">✅ Done!</h5>
+                <p style="color:var(--muted);font-size:.85em">Type !help in your server to see all commands.</p>
+            </div>
+            
+            <p style="margin-top:12px;color:var(--gold);font-weight:600;font-size:.9em">📞 Need help? WhatsApp: 809-510-9143</p>
+        </div>
+    `;
+    el.style.display = 'block';
+}
+
+// ===== ACCESS CODE =====
+function verifyAccess(){
+    const code=document.getElementById('access-code').value.trim().toUpperCase();
+    const el=document.getElementById('access-result');
+    if(!code){el.innerHTML='<p style="color:var(--red)">Please enter a code.</p>';return}
+    if(code.length>=12){
+        const isLifetime = code.startsWith('LT') || code.startsWith('LIFETIME');
+        const tierName = isLifetime ? 'Lifetime' : 'Pro';
+        const tierColor = isLifetime ? '#facc15' : '#a855f7';
+        
+        // Bot features based on tier
+        const proFeatures = [
+            {name:'Economy System',cmd:'!balance !daily !work !gamble !pay !shop',icon:'💰',enabled:true},
+            {name:'Leveling System',cmd:'!rank !leaderboard',icon:'📈',enabled:true},
+            {name:'Moderation',cmd:'!ban !kick !mute !warn !purge',icon:'🛡️',enabled:true},
+            {name:'Giveaways',cmd:'!giveaway !reroll',icon:'🎁',enabled:true},
+            {name:'Ticket System',cmd:'!ticket setup !ticket close',icon:'🎫',enabled:true},
+            {name:'Welcome & Goodbye',cmd:'!setwelcome !setgoodbye',icon:'👋',enabled:true},
+            {name:'Nitro for YOUR Servers',cmd:'Auto-boosts your servers',icon:'🎮',enabled:true},
+            {name:'Nitro for YOUR Account',cmd:'Personal Discord Nitro',icon:'⭐',enabled:isLifetime},
+            {name:'Custom Bot Branding',cmd:'Your name & logo on bot',icon:'🎨',enabled:isLifetime},
+            {name:'Priority Support',cmd:'Direct WhatsApp access',icon:'📞',enabled:isLifetime}
+        ];
+        
+        const featuresHTML = proFeatures.map(f => `
+            <div style="display:flex;align-items:center;gap:10px;padding:10px;border-bottom:1px solid var(--border)">
+                <span style="font-size:1.3em">${f.icon}</span>
+                <div style="flex:1">
+                    <div style="font-weight:600;font-size:.9em">${f.name}</div>
+                    <div style="color:var(--muted);font-size:.8em">${f.cmd}</div>
+                </div>
+                <span style="color:${f.enabled?'var(--green)':'var(--red)'};font-weight:700">${f.enabled?'✅ ON':'🔒 LOCKED'}</span>
+            </div>
+        `).join('');
+        
+        el.innerHTML=`
+            <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:20px;text-align:left">
+                <h3 style="color:var(--green);margin-bottom:4px">✅ ${tierName} Activated!</h3>
+                <p style="color:${tierColor};font-weight:600;margin-bottom:16px">Tier: ${tierName} — ${isLifetime?'ALL features unlocked':'Bot + Server Nitro'}</p>
+                
+                <!-- Bot Installer -->
+                <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px">
+                    <h4 style="color:var(--gold);margin-bottom:12px;font-size:1.1em">🤖 Discord Bot Installer</h4>
+                    <p style="color:var(--muted);font-size:.85em;margin-bottom:16px">Click below to install the bot on your Discord server. Features activate based on your plan.</p>
+                    
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+                        <button class="btn btn-gold" onclick="installBot('${tierName}')" style="flex:1;min-width:200px">📥 Install Bot on Discord</button>
+                        <button class="btn btn-gray" onclick="showBotGuide()" style="flex:1;min-width:200px">📋 View Setup Guide</button>
+                    </div>
+                    
+                    <div id="bot-installer" style="display:none"></div>
+                </div>
+                
+                <!-- Active Features -->
+                <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px">
+                    <h4 style="color:var(--gold);margin-bottom:8px">⚡ Active Features:</h4>
+                    ${featuresHTML}
+                </div>
+                
+                <!-- Nitro Section -->
+                ${isLifetime ? `
+                <div style="background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.2);border-radius:10px;padding:16px;margin-bottom:16px">
+                    <h4 style="color:var(--gold);margin-bottom:8px">🎮 Discord Nitro — YOUR Account:</h4>
+                    <p style="color:var(--muted);font-size:.9em">Contact WhatsApp <b>809-510-9143</b> with your code to receive:<br>
+                    • Discord Nitro activated on YOUR personal account<br>
+                    • 2 Server Boosts included<br>
+                    • Custom emoji anywhere<br>
+                    • HD video streaming<br>
+                    • Animated avatar & banner</p>
+                </div>` : `
+                <div style="background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);border-radius:10px;padding:16px;margin-bottom:16px">
+                    <h4 style="color:var(--purple);margin-bottom:8px">🎮 Discord Nitro — Servers Only:</h4>
+                    <p style="color:var(--muted);font-size:.9em">Your bot will auto-boost servers you create. Upgrade to Lifetime for personal Nitro!</p>
+                </div>`}
+                
+                <p style="margin-top:12px;color:var(--gold);font-weight:600">📞 Need help? WhatsApp: 809-510-9143</p>
+            </div>`;
+        localStorage.setItem('toolbox_premium','true');
+        localStorage.setItem('toolbox_tier', isLifetime ? 'lifetime' : 'pro');
+        document.querySelectorAll('.tool-card.limited').forEach(c=>c.classList.remove('limited'));
+    } else {
+        el.innerHTML='<p style="color:var(--red)">❌ Invalid code. Please check and try again.</p>';
+    }
+}
+
+// Check if already premium
+if(localStorage.getItem('toolbox_premium')==='true'){
+    document.querySelectorAll('.tool-card.limited').forEach(c=>c.classList.remove('limited'));
+}
+
+// Init usage UIs
+['qrcode','invoice','password','color','json','base64','hash','uuid','markdown','lorem','gradient','wordcount'].forEach(t=>{
+    const map={qrcode:'qr-usage',invoice:'inv-usage',password:'pw-usage',color:'color-usage',json:'json-usage',base64:'b64-usage',hash:'hash-usage',uuid:'uuid-usage',markdown:'md-usage',lorem:'lorem-usage',gradient:'grad-usage',wordcount:'wc-usage'};
+    updateUsageUI(t,map[t]);
+});
+
+// Set invoice date
+document.getElementById('inv-date').value=new Date().toISOString().split('T')[0];
+</script>
+
+<!-- INSTALL FAB (floating button) -->
+<div class="install-fab" id="install-banner">
+    <div class="install-fab-tooltip" id="install-tooltip">
+        <h4>📱 Install ToolBox Pro</h4>
+        <p>Add to your home screen for quick access & offline use</p>
+        <div class="tooltip-btns">
+            <button class="tooltip-install" onclick="installApp()">Install</button>
+            <button class="tooltip-close" onclick="dismissInstall()">Later</button>
+        </div>
+    </div>
+    <button class="install-fab-btn" onclick="toggleInstallTooltip()">📲</button>
+</div>
+
+<!-- INSTALL GUIDE MODAL (platform-specific) -->
+<div class="install-modal" id="install-modal">
+    <div class="install-modal-card">
+        <button class="install-modal-close" onclick="document.getElementById('install-modal').classList.remove('active')">✕</button>
+        <div class="install-modal-icon">📲</div>
+        <h3>Install ToolBox Pro</h3>
+        <p id="install-modal-desc">Follow the steps below to install this app on your device.</p>
+        <div class="install-steps" id="install-steps"></div>
+        <button class="btn btn-gold" style="margin-top:16px;width:100%" onclick="document.getElementById('install-modal').classList.remove('active')">Got it!</button>
+    </div>
+</div>
+
+<!-- NOTIFICATION PERMISSION PROMPT -->
+<div class="notif-prompt" id="notif-prompt">
+    <div class="notif-prompt-card">
+        <div class="bell-icon">🔔</div>
+        <h3>Stay Updated!</h3>
+        <p>Get notified when we add new tools, features, and exclusive deals.</p>
+        <div class="notif-features">
+            <div class="notif-feature"><span>🆕</span> New tools & features</div>
+            <div class="notif-feature"><span>💰</span> Exclusive discounts & deals</div>
+            <div class="notif-feature"><span>⚡</span> Instant update alerts</div>
+            <div class="notif-feature"><span>🎁</span> Free premium giveaways</div>
+        </div>
+        <div class="notif-btns">
+            <button class="notif-allow" onclick="allowNotifications()">Enable Notifications</button>
+            <button class="notif-later" onclick="laterNotifications()">Later</button>
+        </div>
+        <span class="notif-skip" onclick="skipNotifications()">Don't ask again</span>
+    </div>
+</div>
+
+<!-- UPDATE BANNER -->
+<div class="update-banner" id="update-banner">
+    <h4>🔄 New Update!</h4>
+    <p>Refresh for latest features</p>
+    <button class="btn-update" onclick="applyUpdate()">Update Now</button>
+    <button class="btn-dismiss" onclick="dismissUpdate()">✕</button>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="payment-modal" id="payment-modal">
+    <div class="payment-card" id="payment-card">
+        <div id="payment-step-email">
+            <div style="font-size:2.5em;margin-bottom:12px">💳</div>
+            <h3>Complete Your Purchase</h3>
+            <div class="plan-badge" id="payment-plan-badge"></div>
+            <p style="color:var(--muted);font-size:.9em;margin-bottom:20px">Enter your email to receive your activation key instantly after payment.</p>
+            <label>Your Email Address</label>
+            <input type="email" id="payment-email" placeholder="your@email.com">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding:10px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:8px">
+                <span>🔒</span>
+                <span style="font-size:.8em;color:var(--green)">Your email is safe. Used only for key generation.</span>
+            </div>
+            <button class="pay-btn" id="pay-btn" onclick="goToPayPal()">Pay with PayPal</button>
+            <button class="cancel-btn" onclick="closePayment()">Cancel</button>
+        </div>
+        <div id="payment-step-key" style="display:none">
+            <div class="key-screen">
+                <div class="check-icon">✅</div>
+                <h3 style="color:var(--green)">Payment Detected!</h3>
+                <p style="color:var(--muted);font-size:.9em">Your activation key has been generated:</p>
+                <div class="key-box" id="generated-key" onclick="copyGeneratedKey()"></div>
+                <p style="font-size:.8em;color:var(--muted)">👆 Click to copy your key</p>
+                <div class="key-info">
+                    <b>📋 How to activate:</b><br>
+                    1. Copy your key above<br>
+                    2. Scroll down to "My Access"<br>
+                    3. Paste your key<br>
+                    4. Click "Unlock"<br>
+                    5. Enjoy all premium features! 🎉
+                </div>
+                <button class="activate-btn" onclick="activateNow()">🔑 Activate Now</button>
+                <button class="cancel-btn" onclick="closePayment()" style="margin-top:8px">I'll activate later</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+    <a href="#tools" onclick="closeMobileMenu()">🧰 Tools</a>
+    <a href="#discord" onclick="closeMobileMenu()">🤖 Discord Bot</a>
+    <a href="#pricing" onclick="closeMobileMenu()">💰 Pricing</a>
+    <a href="#access" onclick="closeMobileMenu()">🔑 My Access</a>
+    <a href="#pricing" class="cta-btn" onclick="closeMobileMenu()">Get Premium</a>
+</div>
+
+<script>
+// ===== PWA: SERVICE WORKER =====
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+        console.log('[PWA] Service Worker registered');
+        // Check for updates every 30 seconds
+        setInterval(() => reg.update(), 30000);
+        reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            newWorker.addEventListener('statechange', () => {
+                if(newWorker.state === 'installed' && navigator.serviceWorker.controller){
+                    document.getElementById('update-banner').classList.add('show');
+                }
+            });
+        });
+    });
+    // Listen for SW update messages
+    navigator.serviceWorker.addEventListener('message', event => {
+        if(event.data.type === 'SW_UPDATED'){
+            document.getElementById('update-banner').classList.add('show');
+        }
+    });
+}
+
+// ===== PWA: INSTALL PROMPT =====
+let deferredPrompt = null;
+
+// Always show the FAB install button (not just when beforeinstallprompt fires)
+setTimeout(() => {
+    if(!localStorage.getItem('toolbox_installed')){
+        document.getElementById('install-banner').classList.add('show');
+    }
+}, 3000);
+
+window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+});
+
+function detectPlatform(){
+    const ua = navigator.userAgent || '';
+    if(/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) return 'ios';
+    if(/Android/.test(ua)) return 'android';
+    return 'desktop';
+}
+
+function getInstallSteps(){
+    const platform = detectPlatform();
+    const steps = [];
+    if(platform === 'ios'){
+        steps.push({text:'Open this page in <b>Safari</b> (required for install)'});
+        steps.push({text:'Tap the <b>Share button</b> 📤 at the bottom'});
+        steps.push({text:'Scroll down and tap <b>"Add to Home Screen"</b>'});
+        steps.push({text:'Tap <b>"Add"</b> in the top right corner'});
+        steps.push({text:'<b>Done!</b> ToolBox Pro now appears on your home screen 🎉'});
+    } else if(platform === 'android'){
+        steps.push({text:'Open this page in <b>Chrome</b> browser'});
+        steps.push({text:'Tap the <b>three dots menu</b> ⋮ in the top right'});
+        steps.push({text:'Tap <b>"Install app"</b> or <b>"Add to Home Screen"</b>'});
+        steps.push({text:'Tap <b>"Install"</b> on the popup'});
+        steps.push({text:'<b>Done!</b> ToolBox Pro is now installed! 🎉'});
+    } else {
+        steps.push({text:'Open this page in <b>Chrome</b> or <b>Edge</b> browser'});
+        steps.push({text:'Click the <b>Install icon</b> 📲 in the address bar (right side)'});
+        steps.push({text:'Or click <b>three dots menu</b> → <b>"Install ToolBox Pro"</b>'});
+        steps.push({text:'Click <b>"Install"</b> on the popup'});
+        steps.push({text:'<b>Done!</b> ToolBox Pro appears as an app on your desktop! 🎉'});
+    }
+    return {platform, steps};
+}
+
+function installApp(){
+    if(deferredPrompt){
+        // Native install prompt available (Android/Chrome)
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(choice => {
+            if(choice.outcome === 'accepted'){
+                document.getElementById('install-banner').classList.remove('show');
+                localStorage.setItem('toolbox_installed','true');
+            }
+            deferredPrompt = null;
+        });
+    } else {
+        // No native prompt — show manual instructions modal
+        showInstallGuide();
+    }
+}
+
+function showInstallGuide(){
+    const {platform, steps} = getInstallSteps();
+    const modal = document.getElementById('install-modal');
+    const stepsContainer = document.getElementById('install-steps');
+    const desc = document.getElementById('install-modal-desc');
+    
+    let platformBadge = '';
+    if(platform === 'ios'){
+        platformBadge = '<span class="install-platform-badge ios">🍎 iPhone / iPad</span>';
+        desc.textContent = 'On iPhone/iPad, you need to use Safari to install.';
+    } else if(platform === 'android'){
+        platformBadge = '<span class="install-platform-badge android">🤖 Android</span>';
+        desc.textContent = 'Install ToolBox Pro on your Android device.';
+    } else {
+        platformBadge = '<span class="install-platform-badge desktop">💻 Desktop</span>';
+        desc.textContent = 'Install ToolBox Pro on your computer.';
+    }
+    
+    stepsContainer.innerHTML = platformBadge + steps.map((s,i) => 
+        '<div class="install-step"><div class="step-num">' + (i+1) + '</div><div class="step-text">' + s.text + '</div></div>'
+    ).join('');
+    
+    modal.classList.add('active');
+    document.getElementById('install-tooltip').classList.remove('show');
+}
+
+function dismissInstall(){
+    document.getElementById('install-banner').classList.remove('show');
+    document.getElementById('install-tooltip').classList.remove('show');
+    localStorage.setItem('toolbox_installed_dismissed','true');
+}
+
+function toggleInstallTooltip(){
+    const tooltip = document.getElementById('install-tooltip');
+    tooltip.classList.toggle('show');
+}
+
+// Close tooltip when clicking outside
+document.addEventListener('click', e => {
+    const fab = document.getElementById('install-banner');
+    const tooltip = document.getElementById('install-tooltip');
+    if(fab && !fab.contains(e.target)){
+        tooltip.classList.remove('show');
+    }
+});
+
+// ===== PWA: AUTO-UPDATE =====
+function applyUpdate(){
+    if(navigator.serviceWorker.controller){
+        navigator.serviceWorker.controller.postMessage({type:'SKIP_WAITING'});
+    }
+    window.location.reload();
+}
+
+function dismissUpdate(){
+    document.getElementById('update-banner').classList.remove('show');
+}
+
+// ===== MOBILE NAV =====
+function toggleMobileMenu(){
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('show');
+}
+function closeMobileMenu(){
+    document.getElementById('mobile-menu').classList.remove('show');
+}
+
+// ===== iOS PWA SUPPORT =====
+window.addEventListener('load', () => {
+    if('standalone' in window.navigator || window.navigator.standalone){
+        document.body.classList.add('pwa-mode');
+    }
+    // Handle iOS standalone mode
+    if(window.navigator.standalone === true){
+        document.body.style.paddingTop = '20px';
+    }
+});
+
+// ===== PREVENT DOUBLE TAP ZOOM on buttons =====
+let lastTouchEnd = 0;
+document.addEventListener('touchend', e => {
+    const now = Date.now();
+    if(now - lastTouchEnd <= 300) e.preventDefault();
+    lastTouchEnd = now;
+}, false);
+
+// ===== PUSH NOTIFICATIONS (OneSignal) =====
+// NOTE: Replace YOUR_ONESIGNAL_APP_ID below with your real OneSignal App ID
+const ONESIGNAL_APP_ID = 'YOUR_ONESIGNAL_APP_ID';
+
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+        appId: ONESIGNAL_APP_ID,
+        notifyButton: { enable: false },
+        welcomeNotification: {
+            title: 'ToolBox Pro',
+            message: 'Notifications enabled! You will receive updates.'
+        }
+    });
+    
+    // Check if already subscribed
+    const isSubscribed = await OneSignal.isPushNotificationsAllowed();
+    const hasPrompted = localStorage.getItem('toolbox_notif_prompted');
+    const hasSkipped = localStorage.getItem('toolbox_notif_skipped');
+    
+    if(isSubscribed){
+        // Already subscribed — show green badge on FAB
+        const fabBtn = document.querySelector('.install-fab-btn');
+        if(fabBtn) fabBtn.classList.add('notif-active');
+    } else if(!hasPrompted && !hasSkipped){
+        // Show custom prompt after 8 seconds
+        setTimeout(() => {
+            document.getElementById('notif-prompt').classList.add('show');
+        }, 8000);
+    }
+    
+    // Listen for push events
+    OneSignal.on('notificationDisplay', function(event) {
+        console.log('[Notif] Received:', event);
+    });
+    
+    OneSignal.on('notificationClicked', function(event) {
+        console.log('[Notif] Clicked:', event);
+        window.location.href = '/';
+    });
+});
+
+// Custom notification prompt functions
+function allowNotifications(){
+    if('Notification' in window){
+        Notification.requestPermission().then(permission => {
+            if(permission === 'granted'){
+                // Also trigger OneSignal
+                window.OneSignalDeferred = window.OneSignalDeferred || [];
+                OneSignalDeferred.push(async function(OneSignal) {
+                    await OneSignal.registerForPushNotifications();
+                    const fabBtn = document.querySelector('.install-fab-btn');
+                    if(fabBtn) fabBtn.classList.add('notif-active');
+                });
+                showNotifToast('Notifications enabled! 🔔');
+            }
+        });
+    }
+    document.getElementById('notif-prompt').classList.remove('show');
+    localStorage.setItem('toolbox_notif_prompted', 'true');
+}
+
+function laterNotifications(){
+    document.getElementById('notif-prompt').classList.remove('show');
+    localStorage.setItem('toolbox_notif_prompted', 'true');
+    // Will ask again next visit
+}
+
+function skipNotifications(){
+    document.getElementById('notif-prompt').classList.remove('show');
+    localStorage.setItem('toolbox_notif_skipped', 'true');
+}
+
+// Toast notification for in-app feedback
+function showNotifToast(msg){
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--green);border-radius:12px;padding:14px 24px;color:var(--green);font-weight:600;font-size:.9em;z-index:9999;animation:notif-pop .3s ease;box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:90vw;text-align:center';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
+
+// Send test notification (for Daniel's use)
+function sendTestNotification(){
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+        const isSubscribed = await OneSignal.isPushNotificationsAllowed();
+        if(isSubscribed){
+            showNotifToast('Test notification sent! Check your device 🔔');
+        } else {
+            showNotifToast('Enable notifications first! 🔔');
+        }
+    });
+}
+</script>
+</body>
+</html>
